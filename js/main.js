@@ -13,6 +13,7 @@ import { renderConnectivityBanner } from './dom/render-chrome.js';
 import { emptyActiveHtml, emptyCompletedHtml } from './dom/render-empty.js';
 import { showToast } from './dom/render-toast.js';
 import { registerServiceWorker } from './pwa/register-sw.js';
+import { initTorches } from './torch.js';
 
 function online() {
   return navigator.onLine;
@@ -159,6 +160,7 @@ function boot() {
   });
 
   registerServiceWorker();
+  initTorches();
 }
 
 boot();

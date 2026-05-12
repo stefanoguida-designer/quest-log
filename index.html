@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#5c1a2b" />
+  <meta name="theme-color" content="#1a1510" />
   <meta name="description" content="Quest Log — a journal for deeds yet undone." />
   <title>Quest Log</title>
   <link rel="manifest" href="/manifest.webmanifest" />
@@ -23,7 +23,11 @@
     <div id="ql-toast-slot" class="ql-toast-slot" aria-live="polite" hidden></div>
     <div id="ql-banner-slot" aria-live="polite"></div>
     <header>
-      <h1 class="ql-title" id="ql-title">Quest Log</h1>
+      <div class="ql-title-row">
+        <canvas class="torch" width="24" height="48" data-delay="0"></canvas>
+        <h1 class="ql-title" id="ql-title">Quest Log</h1>
+        <canvas class="torch" width="24" height="48" data-delay="100"></canvas>
+      </div>
       <p class="ql-sub" id="ql-sub">A journal for deeds yet undone.</p>
     </header>
 

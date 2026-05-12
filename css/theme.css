@@ -1,11 +1,21 @@
 :root {
-  --ql-parchment: #f4e4c1;
-  --ql-parchment-deep: #e8d4b0;
-  --ql-burgundy: #5c1a2b;
+  --ql-bg: #1a1510;
+  --ql-bg-panel: #241e16;
+  --ql-stone: #3d3428;
+  --ql-stone-light: #4f4538;
   --ql-gold: #c9a227;
-  --ql-forest: #2d5a3d;
-  --ql-ink: #2a2118;
-  --ql-muted: rgba(42, 33, 24, 0.55);
+  --ql-gold-dim: #8a6e1a;
+  --ql-cream: #e8d4a0;
+  --ql-muted: rgba(232, 212, 160, 0.5);
+  --ql-red: #8b1a2a;
+}
+
+.pixel-art,
+canvas.torch,
+body {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  image-rendering: -moz-crisp-edges;
 }
 
 *,
@@ -22,11 +32,10 @@ body {
   margin: 0;
   min-height: 100%;
   font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-  color: var(--ql-ink);
-  background-color: var(--ql-parchment);
-  background-image:
-    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(201, 162, 39, 0.12), transparent 55%),
-    linear-gradient(180deg, var(--ql-parchment) 0%, var(--ql-parchment-deep) 100%);
+  color: var(--ql-cream);
+  background-color: var(--ql-bg);
+  background-image: url('/assets/sprites/stone-tile.png');
+  background-size: 48px 48px;
 }
 
 .ql-scroll {
@@ -36,21 +45,33 @@ body {
 }
 
 .ql-banner {
-  border: 1px solid var(--ql-burgundy);
-  background: rgba(92, 26, 43, 0.08);
-  color: var(--ql-burgundy);
+  border: 1px solid var(--ql-red);
+  background: rgba(139, 26, 42, 0.2);
+  color: var(--ql-cream);
   padding: 0.65rem 0.85rem;
   border-radius: 0.35rem;
   margin-bottom: 1rem;
   font-size: 0.95rem;
 }
 
+.ql-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.torch {
+  flex-shrink: 0;
+  display: block;
+}
+
 .ql-title {
   font-family: 'Cinzel', 'Times New Roman', serif;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: var(--ql-burgundy);
-  margin: 0 0 0.35rem;
+  color: var(--ql-gold);
+  margin: 0;
   font-size: clamp(1.5rem, 4vw, 2rem);
 }
 
@@ -61,11 +82,13 @@ body {
 }
 
 .ql-panel {
-  border: 1px solid rgba(92, 26, 43, 0.25);
+  border: 2px solid var(--ql-gold-dim);
   border-radius: 0.5rem;
-  background: rgba(255, 255, 255, 0.35);
+  background: var(--ql-bg-panel);
   padding: 1rem;
-  box-shadow: 0 0.35rem 1rem rgba(42, 33, 24, 0.08);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(201, 162, 39, 0.1);
 }
 
 .ql-form {
@@ -80,9 +103,14 @@ body {
   min-height: 2.75rem;
   padding: 0.5rem 0.65rem;
   border-radius: 0.35rem;
-  border: 1px solid rgba(92, 26, 43, 0.35);
-  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid var(--ql-stone-light);
+  background: var(--ql-stone);
+  color: var(--ql-cream);
   font: inherit;
+}
+
+.ql-input::placeholder {
+  color: var(--ql-muted);
 }
 
 .ql-input:focus-visible {
@@ -94,11 +122,11 @@ body {
   min-height: 2.75rem;
   padding: 0 1rem;
   border-radius: 0.35rem;
-  border: 1px solid var(--ql-burgundy);
-  background: var(--ql-burgundy);
-  color: var(--ql-parchment);
+  border: none;
+  background: var(--ql-gold);
+  color: var(--ql-bg);
   font-family: 'Cinzel', serif;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.06em;
   cursor: pointer;
 }
@@ -110,13 +138,21 @@ body {
 
 .ql-btn--ghost {
   background: transparent;
-  color: var(--ql-burgundy);
+  color: var(--ql-gold);
+  border: 1px solid var(--ql-gold-dim);
+  border-radius: 0.35rem;
+}
+
+.ql-quest-actions .ql-btn--ghost {
+  background: transparent;
+  color: var(--ql-gold);
+  border-color: var(--ql-gold-dim);
 }
 
 .ql-section-title {
   font-family: 'Cinzel', serif;
   font-size: 1.05rem;
-  color: var(--ql-burgundy);
+  color: var(--ql-gold);
   margin: 1.25rem 0 0.5rem;
 }
 
@@ -136,8 +172,13 @@ body {
   gap: 0.75rem;
   padding: 0.65rem 0.75rem;
   border-radius: 0.35rem;
-  border: 1px solid rgba(92, 26, 43, 0.15);
-  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--ql-stone-light);
+  background: var(--ql-stone);
+  transition: border-color 150ms ease;
+}
+
+.ql-quest:hover {
+  border-color: var(--ql-gold-dim);
 }
 
 .ql-quest--complete {
@@ -153,6 +194,7 @@ body {
   margin: 0;
   font-size: 1rem;
   font-weight: 600;
+  color: var(--ql-cream);
 }
 
 .ql-quest-meta {
@@ -173,8 +215,9 @@ body {
   font-size: 0.8rem;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
-  border: 1px solid rgba(92, 26, 43, 0.35);
-  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--ql-stone-light);
+  background: var(--ql-bg-panel);
+  color: var(--ql-cream);
   cursor: pointer;
 }
 
@@ -186,14 +229,20 @@ body {
 .ql-empty {
   padding: 0.75rem;
   border-radius: 0.35rem;
-  border: 1px dashed rgba(92, 26, 43, 0.35);
+  border: 1px dashed var(--ql-gold-dim);
   color: var(--ql-muted);
   font-style: italic;
+  background: transparent;
 }
 
 .ql-lead {
   margin: 0.35rem 0 0;
   line-height: 1.5;
+  color: var(--ql-muted);
+}
+
+.ql-lead a {
+  color: var(--ql-gold);
 }
 
 .ql-offline-fallback {
@@ -240,14 +289,15 @@ body {
   margin: 0.35rem auto 0.75rem;
   padding: 0.85rem 1rem;
   border-radius: 0.4rem;
-  border: 1px solid rgba(92, 26, 43, 0.45);
-  box-shadow: 0 0.4rem 1.1rem rgba(42, 33, 24, 0.18);
-  background: linear-gradient(180deg, rgba(255, 252, 245, 0.98), rgba(244, 228, 193, 0.96));
+  border: 1px solid var(--ql-gold-dim);
+  box-shadow: 0 0.4rem 1.1rem rgba(0, 0, 0, 0.45);
+  background: var(--ql-bg-panel);
+  color: var(--ql-cream);
 }
 
 .ql-toast--warn {
-  border-color: rgba(92, 26, 43, 0.65);
-  background: linear-gradient(180deg, rgba(255, 245, 238, 0.99), rgba(255, 228, 210, 0.92));
+  border-color: var(--ql-red);
+  background: var(--ql-bg-panel);
 }
 
 .ql-toast-text {
@@ -255,7 +305,7 @@ body {
   flex: 1 1 12rem;
   font-size: 0.98rem;
   line-height: 1.45;
-  color: var(--ql-ink);
+  color: var(--ql-cream);
 }
 
 .ql-toast-actions {
@@ -269,9 +319,9 @@ body {
   letter-spacing: 0.05em;
   padding: 0.35rem 0.65rem;
   border-radius: 0.3rem;
-  border: 1px solid var(--ql-burgundy);
-  background: var(--ql-burgundy);
-  color: var(--ql-parchment);
+  border: none;
+  background: var(--ql-gold);
+  color: var(--ql-bg);
   cursor: pointer;
 }
 
