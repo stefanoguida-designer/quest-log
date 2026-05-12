@@ -21,8 +21,8 @@ holisticQualityRating: '3/5 — Adequate'
 overallStatus: Warning
 ---
 
-> **Storico — non usare come stato attuale del PRD**  
-> Questo report si riferisce a una versione **precedente** di `docs/PRD.md` (maggio 2026), prima del rifacimento allineato a BMAD/stack attuale. Per validare il PRD corrente, rieseguire `bmad-validate-prd` sul file in uso.
+> **Historical — not current PRD state**  
+> This report validated an **earlier** `docs/PRD.md` (May 2026) before the BMAD-aligned rewrite and stack freeze. Re-run `bmad-validate-prd` on the PRD file you actually ship if you need an up-to-date machine trace.
 
 # PRD Validation Report
 

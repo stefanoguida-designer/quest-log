@@ -1,61 +1,61 @@
-# BMAD — Quest Log (indice artefatti)
+# BMAD — Quest Log (artifact index)
 
-_Documento di orientamento. Le specifiche vincolanti sono **PRD**, **product brief**, **architecture** e **user stories**; il codice in repo è la prova del comportamento._
+_Orientation doc only. The binding specifications are the **PRD**, **product brief**, **architecture**, and **user stories**; the code in this repository is the behavioral source of truth._
 
-## Artefatti canonici
+## Canonical artifacts
 
-| Artefatto | Percorso | Ruolo |
+| Artifact | Path | Role |
 | --- | --- | --- |
-| Product brief | [`product-brief.md`](product-brief.md) | Scope, utenti, in/out MVP |
-| PRD | [`PRD.md`](PRD.md) | Requisiti, **ID FR-Q / FR-P**, NFR summary |
-| Architecture | [`../_bmad-output/planning-artifacts/architecture.md`](../_bmad-output/planning-artifacts/architecture.md) | ADR, precache SW, mapping FR → file |
-| User stories + AC | [`../_bmad-output/planning-artifacts/user-stories.md`](../_bmad-output/planning-artifacts/user-stories.md) | US-01–US-06, criteri testabili |
-| Checklist verifica | [`../_bmad-output/planning-artifacts/verification-checklist.md`](../_bmad-output/planning-artifacts/verification-checklist.md) | Lighthouse, axe, manuali |
-| Validazione PRD (corrente) | [`../_bmad-output/planning-artifacts/PRD-validation-report-current.md`](../_bmad-output/planning-artifacts/PRD-validation-report-current.md) | Report 2026-05-12 (Pass) |
-| Backlog opzionale | [`optional-tasklist.md`](optional-tasklist.md) | Migliorie non MVP |
-| Checklist polish finale | [`final-polish-tasklist.md`](final-polish-tasklist.md) | Chiusura issue strutturali (questo filone) |
+| Product brief | [`product-brief.md`](product-brief.md) | Scope, users, MVP in/out |
+| PRD | [`PRD.md`](PRD.md) | Requirements, **FR-Q / FR-P** IDs, NFR summary |
+| Architecture | [`../_bmad-output/planning-artifacts/architecture.md`](../_bmad-output/planning-artifacts/architecture.md) | ADRs, SW precache, FR → file mapping |
+| User stories + AC | [`../_bmad-output/planning-artifacts/user-stories.md`](../_bmad-output/planning-artifacts/user-stories.md) | US-01–US-06, testable acceptance criteria |
+| Verification checklist | [`../_bmad-output/planning-artifacts/verification-checklist.md`](../_bmad-output/planning-artifacts/verification-checklist.md) | Lighthouse, axe, manual checks |
+| Current PRD validation | [`../_bmad-output/planning-artifacts/PRD-validation-report-current.md`](../_bmad-output/planning-artifacts/PRD-validation-report-current.md) | Report dated 2026-05-12 (Pass) |
+| Optional backlog | [`optional-tasklist.md`](optional-tasklist.md) | Non-MVP improvements |
+| Final polish checklist | [`final-polish-tasklist.md`](final-polish-tasklist.md) | Structural doc closure (completed) |
 
-## Inventario componenti ↔ file (implementazione)
+## Component inventory ↔ files (as implemented)
 
-| Concetto | File / entry |
+| Concept | File / entry |
 | --- | --- |
-| Shell + meta PWA | `index.html` |
-| Stile + toast + layout | `css/theme.css` |
+| Shell + PWA meta | `index.html` |
+| Layout, theme, toast | `css/theme.css` |
 | Motion | `css/motion.css` |
-| Bootstrap, form, rete | `js/main.js` |
-| Stato + mutazioni | `js/state.js` |
-| `localStorage` | `js/storage.js` |
-| Copia UI | `js/strings.js` |
-| Liste quest | `js/dom/render-list.js` |
-| Stati vuoti | `js/dom/render-empty.js` |
-| Banner offline | `js/dom/render-chrome.js` |
-| Toast heraldico | `js/dom/render-toast.js` |
-| Registrazione SW | `js/pwa/register-sw.js` |
+| Bootstrap, form, connectivity | `js/main.js` |
+| State + mutations | `js/state.js` |
+| Browser persistence | `js/storage.js` |
+| UI copy | `js/strings.js` |
+| Quest lists | `js/dom/render-list.js` |
+| Empty states | `js/dom/render-empty.js` |
+| Offline banner | `js/dom/render-chrome.js` |
+| Heraldic toast | `js/dom/render-toast.js` |
+| Service worker registration | `js/pwa/register-sw.js` |
 | Manifest | `manifest.webmanifest` |
 | Service worker | `sw.js` |
-| Fallback offline | `offline.html` |
-| Icone | `assets/icons/*` |
+| Offline fallback | `offline.html` |
+| Icons | `assets/icons/*` |
 
-## Flussi principali (allineati al codice)
+## Primary flows (aligned with code)
 
-1. **Aggiungi** — Submit form → validazione (vuoto / lunghezza) → `addQuest` → toast se errore; animazione unfurl se motion consentita.
-2. **Completa** — Pulsante “Seal complete” (online) → animazione sigillo oppure immediato se reduced motion → `completeQuest`.
-3. **Elimina** — `confirm` browser → animazione delete → `deleteQuest`.
-4. **Ripristina** — Da completati ad attivi → `uncompleteQuest`.
-5. **Offline** — Banner + pulsanti disabilitati; toast se si tenta mutazione.
+1. **Add** — Form submit → validation (empty / length) → `addQuest` → toast on error; unfurl animation when motion is allowed.
+2. **Complete** — “Seal complete” control (when online) → seal animation or immediate update if reduced motion → `completeQuest`.
+3. **Delete** — Browser `confirm` → delete animation → `deleteQuest`.
+4. **Restore** — From completed back to active → `uncompleteQuest`.
+5. **Offline** — Banner + disabled action buttons; toast if a mutation is attempted.
 
-## Decisioni di prodotto / UX (stato attuale)
+## Product / UX decisions (current)
 
-| Tema | Scelta |
+| Topic | Choice |
 | --- | --- |
-| Stack | Vanilla JS, ES modules, nessun framework UI |
-| CSS | Custom (`ql-*`, token `:root`); nessun Tailwind nel bundle MVP |
-| Font | Cinzel + Source Serif 4 (Google Fonts, CDN) |
-| Delete | Con conferma (`window.confirm`), coerente con PRD |
-| Sezione completati | Sempre visibile con empty state dedicato (non collassata) |
-| Manifest | `manifest.webmanifest` (non `manifest.json`) |
-| Service worker | `sw.js` in root, cache `questlog-shell-v2` |
+| Stack | Vanilla JS, ES modules, no UI framework |
+| CSS | Custom (`ql-*`, `:root` tokens); no Tailwind in the MVP bundle |
+| Fonts | Cinzel + Source Serif 4 (Google Fonts CDN) |
+| Delete | Confirmation via `window.confirm`, consistent with the PRD |
+| Completed section | Always visible with its own empty state (not collapsed) |
+| Manifest file | `manifest.webmanifest` (not `manifest.json`) |
+| Service worker | `sw.js` at repo root, cache `questlog-shell-v2` |
 
-## Nota storica
+## Historical note
 
-Una bozza narrativa lunga (inventario legacy, US duplicate, riferimenti a `manifest.json` / Tailwind CDN / delete senza conferma) è stata **sostituita da questo indice** per evitare drift rispetto a PRD e codice. Le versioni precedenti restano nella cronologia Git se servono.
+I replaced a long legacy narrative (duplicate stories, wrong filenames such as `manifest.json`, Tailwind CDN as mandatory, delete without confirm) with **this index** to stop drift versus the PRD and the running app. Earlier drafts remain in Git history if needed.

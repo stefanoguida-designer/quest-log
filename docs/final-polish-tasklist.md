@@ -1,22 +1,22 @@
-# Final polish — checklist eseguita
+# Final polish — completed checklist
 
-_Checklist per chiudere le ultime issue di qualità (traceabilità FR, `BMAD.md` obsoleto, riferimenti incrociati). Tutte le voci sotto sono state completate in repo._
+_Checklist I used to close the last documentation-quality gaps (FR traceability, obsolete `BMAD.md`, cross-links). Every item below is done in this repository._
 
-## Struttura e tracciabilità
+## Structure and traceability
 
-- [x] **FR-Q / FR-P nel PRD** — Aggiunta tabella “Requirement IDs (engineering traceability)” in [`PRD.md`](PRD.md), allineata a `architecture.md` (mapping moduli) e alla checklist manuale.
-- [x] **`docs/BMAD.md`** — Sostituito il corpo obsoleto con **indice canonico** + tabella file + flussi + decisioni allineate al prototipo (niente `manifest.json` / `service-worker.js` / Tailwind obbligatorio / delete senza conferma come verità dichiarata).
+- [x] **FR-Q / FR-P in the PRD** — I added the “Requirement IDs (engineering traceability)” table in [`PRD.md`](PRD.md), aligned with `architecture.md` (module mapping) and the manual verification checklist.
+- [x] **`docs/BMAD.md`** — I replaced the obsolete body with a **canonical index** plus file table, flows, and decisions that match the prototype (no `manifest.json` / `service-worker.js` / mandatory Tailwind / unconfirmed delete as stated truth).
 
-## Documentazione incrociata
+## Cross-documentation
 
-- [x] **README / product-brief** — Già puntano a `optional-tasklist.md`; nessun link rotto verso `BMAD.md` (resta sotto `docs/`, ora come indice).
-- [x] **Report validazione PRD (corrente)** — Creato [`_bmad-output/planning-artifacts/PRD-validation-report-current.md`](../_bmad-output/planning-artifacts/PRD-validation-report-current.md) (2026-05-12, **Pass** con warning minori). Lo skill CLI `bmad-validate-prd` + `resolve_customization.py` richiedono **Python 3.11+**; qui la validazione è stata eseguita come revisione strutturata equivalente.
-- [x] **Report validazione PRD (storici)** — Intestazioni “storico” già presenti su `docs/PRD-validation-report.md` e `docs/PRD-v2-validation-report.md`.
+- [x] **README / product brief** — They already pointed at `optional-tasklist.md`; links to `BMAD.md` are valid (`docs/`, now an index).
+- [x] **Current PRD validation report** — I added [`_bmad-output/planning-artifacts/PRD-validation-report-current.md`](../_bmad-output/planning-artifacts/PRD-validation-report-current.md) (2026-05-12, **Pass** with minor warnings). The `bmad-validate-prd` CLI plus `resolve_customization.py` needs **Python 3.11+**; where that was unavailable I still ran an equivalent structured review.
+- [x] **Historical PRD validation reports** — I added “historical” banners at the top of `docs/PRD-validation-report.md` and `docs/PRD-v2-validation-report.md`.
 
-## Opzionale (fuori scope di questa checklist)
+## Optional (outside this checklist)
 
-Migliorie successive restano in [`optional-tasklist.md`](optional-tasklist.md) (iOS meta, test auto, self-host font, …).
+Further improvements live in [`optional-tasklist.md`](optional-tasklist.md) (iOS meta tags, automated tests, self-hosted fonts, …).
 
 ---
 
-_Completamento logico: dopo questa checklist, la triade **PRD ↔ architecture ↔ codice** condivide gli stessi ID FR e gli stessi nomi file PWA._
+_After this checklist, the **PRD ↔ architecture ↔ code** triangle shares the same FR IDs and the same PWA filenames._

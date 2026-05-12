@@ -18,7 +18,7 @@ _Artifact referenced from `docs/PRD.md` frontmatter (`inputDocuments`). Engineer
 
 ### Acceptance criteria
 
-1. Given an active quest, when I activate its “complete” control, then it moves to the completed section and shows at least one completed visual treatment (strike, reduced luminance, or seal overlay) per FR-Q02.
+1. Given an active quest, when I activate its “complete” control, then it moves to the completed section and shows at least one completed visual treatment (strike, reduced luminance, or seal overlay) as required by FR-Q02.
 2. Given I reload the page, the quest remains in the completed section with the same title.
 
 ## US-03 — Delete a quest

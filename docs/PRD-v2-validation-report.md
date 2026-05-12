@@ -23,8 +23,8 @@ holisticQualityRating: '4/5 — Good'
 overallStatus: Warning
 ---
 
-> **Storico — audit trail**  
-> Target di validazione: `docs/PRD-v2.md` (file che potrebbe non esistere più nel repo). Il contenuto funzionale è stato in seguito unificato in `docs/PRD.md`. Usare solo come traccia del processo, non come checklist aperta sul PRD odierno.
+> **Historical — audit trail**  
+> Validation target was `docs/PRD-v2.md` (that file may no longer exist in the repo). The substance was later merged into `docs/PRD.md`. Use this file only as process history, not as an open checklist against today’s PRD.
 
 # PRD Validation Report (v2 input)
 

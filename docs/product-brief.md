@@ -8,12 +8,12 @@ Quest Log is a **mobile-first PWA** that behaves like a personal todo list but r
 
 ## Problem
 
-Mainstream todo apps are competent but emotionally flat. A designer-led prototype should show that **spec-driven development** can still deliver something memorable: clear flows (create, complete, delete, empty states) wrapped in a coherent fantasy metaphor without a backend.
+Mainstream todo apps are competent but emotionally flat. **I want this designer-led prototype** to show that **spec-driven development** can still deliver something memorable: clear flows (create, complete, delete, empty states) wrapped in a coherent fantasy metaphor without a backend.
 
 ## Target users
 
-- **Primary:** People who live on their phone for quick capture and want a bit of delight, not another grey list.
-- **Secondary:** Reviewers assessing **BMAD + Cursor** workflow — the artefact chain (PRD → architecture → stories → code) must be easy to follow.
+- **Primary:** People who live on their phone for quick capture and want a bit of delight, not another gray list.
+- **Secondary:** Reviewers assessing **BMAD + Cursor** workflow — **I keep** the artifact chain (PRD → architecture → stories → code) easy to follow in-repo.
 
 ## MVP scope (in)
 
@@ -30,7 +30,7 @@ Mainstream todo apps are competent but emotionally flat. A designer-led prototyp
 ## Success signals
 
 - All core flows demonstrable on **375px** and **1280px** widths.
-- PWA install path and offline shell behaviour explainable in README + verification checklist.
+- PWA install path and offline shell behavior explainable in README + verification checklist.
 - Tone and motion respect **`prefers-reduced-motion`**.
 
 ## Related documents

@@ -87,7 +87,7 @@ Full stories with acceptance criteria: [`_bmad-output/planning-artifacts/user-st
 - **Complete:** An action on an active quest marks it complete; it moves to a "Completed Quests" section with a visual distinction (struck through, faded, and/or seal metaphor). Optional short motion; must respect reduced-motion preference.
 - **Delete:** Each quest has an abandon/delete action. A **confirmation** step is permitted (browser confirm or inline pattern) to prevent accidental loss.
 - **Restore:** A completed quest may return to the active list (product decision for parity with list state).
-- **Persistence:** Quest state persists across full page reloads on the same device and browser profile (storage mechanism per **Technical Constraints**).
+- **Persistence:** Quest state persists across full page reloads on the same device and browser profile (storage mechanism as specified in **Technical Constraints**).
 
 ### Empty States
 
@@ -109,12 +109,12 @@ These IDs are **stable** and align with [`_bmad-output/planning-artifacts/archit
 | **FR-Q01** | Create quest: submit from input (button or Enter); trim / length validation; new row in active list. |
 | **FR-Q02** | Complete quest: move active → completed with distinct visuals; optional seal motion when allowed. |
 | **FR-Q03** | Delete or restore: delete from active or completed (with confirm as implemented); restore completed → active. |
-| **FR-Q04** | Persistence: all user-visible mutations survive a full reload on the same device and profile; storage engine per Technical Constraints. |
+| **FR-Q04** | Persistence: all user-visible mutations survive a full reload on the same device and profile; storage engine as specified under **Technical Constraints**. |
 | **FR-Q05** | Empty state when there are zero active quests (welcoming copy + affordance to add). |
 | **FR-Q06** | Empty state for completed section when nothing completed yet (distinct from FR-Q05). |
 | **FR-P01** | PWA manifest (`manifest.webmanifest`) correctly linked; metadata for install. |
 | **FR-P02** | Service worker: versioned precache of shell URLs; offline navigation fallback where applicable. |
-| **FR-P03** | Icon set (SVG + 192/512 PNG, maskable entry per manifest) for install surfaces. |
+| **FR-P03** | Icon set (SVG + 192/512 PNG, maskable entry for the manifest) for install surfaces. |
 
 ---
 
@@ -183,8 +183,8 @@ The application speaks in the manner of a royal herald or ancient tome. Task cre
 | Criterion | Definition of Done |
 | --- | --- |
 | All core flows prototyped | Create, complete, delete, restore, empty states functional with mock/local data |
-| BMAD artefacts | Product brief, PRD, architecture / component inventory, user stories with AC — paths referenced in README |
+| BMAD artifacts | Product brief, PRD, architecture / component inventory, user stories with AC — paths referenced in README |
 | Responsive | Works well at **375px** (mobile) and **1280px** (desktop) |
 | PWA installable | Valid manifest + registered service worker; basic Lighthouse PWA checks pass locally |
-| README present | Setup instructions (`http.server` or equivalent), offline MVP behaviour, AI/BMAD integration notes |
+| README present | Setup instructions (`http.server` or equivalent), offline MVP behavior, AI/BMAD integration notes |
 | Aesthetic coherence | Visual language and heraldic tone consistent across UI, empty states, and toasts |
