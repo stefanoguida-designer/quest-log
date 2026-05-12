@@ -1,0 +1,281 @@
+:root {
+  --ql-parchment: #f4e4c1;
+  --ql-parchment-deep: #e8d4b0;
+  --ql-burgundy: #5c1a2b;
+  --ql-gold: #c9a227;
+  --ql-forest: #2d5a3d;
+  --ql-ink: #2a2118;
+  --ql-muted: rgba(42, 33, 24, 0.55);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  color: var(--ql-ink);
+  background-color: var(--ql-parchment);
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(201, 162, 39, 0.12), transparent 55%),
+    linear-gradient(180deg, var(--ql-parchment) 0%, var(--ql-parchment-deep) 100%);
+}
+
+.ql-scroll {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 3rem;
+}
+
+.ql-banner {
+  border: 1px solid var(--ql-burgundy);
+  background: rgba(92, 26, 43, 0.08);
+  color: var(--ql-burgundy);
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.35rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.ql-title {
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ql-burgundy);
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.ql-sub {
+  margin: 0 0 1.25rem;
+  color: var(--ql-muted);
+  font-size: 0.95rem;
+}
+
+.ql-panel {
+  border: 1px solid rgba(92, 26, 43, 0.25);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.35);
+  padding: 1rem;
+  box-shadow: 0 0.35rem 1rem rgba(42, 33, 24, 0.08);
+}
+
+.ql-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.ql-input {
+  flex: 1 1 12rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: 0.35rem;
+  border: 1px solid rgba(92, 26, 43, 0.35);
+  background: rgba(255, 255, 255, 0.65);
+  font: inherit;
+}
+
+.ql-input:focus-visible {
+  outline: 2px solid var(--ql-gold);
+  outline-offset: 2px;
+}
+
+.ql-btn {
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  border-radius: 0.35rem;
+  border: 1px solid var(--ql-burgundy);
+  background: var(--ql-burgundy);
+  color: var(--ql-parchment);
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+.ql-btn:focus-visible {
+  outline: 2px solid var(--ql-gold);
+  outline-offset: 2px;
+}
+
+.ql-btn--ghost {
+  background: transparent;
+  color: var(--ql-burgundy);
+}
+
+.ql-section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  color: var(--ql-burgundy);
+  margin: 1.25rem 0 0.5rem;
+}
+
+.ql-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ql-quest {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.35rem;
+  border: 1px solid rgba(92, 26, 43, 0.15);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.ql-quest--complete {
+  opacity: 0.72;
+}
+
+.ql-quest--complete .ql-quest-title {
+  text-decoration: line-through;
+  color: var(--ql-muted);
+}
+
+.ql-quest-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.ql-quest-meta {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+  color: var(--ql-muted);
+}
+
+.ql-quest-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.ql-quest-actions button {
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(92, 26, 43, 0.35);
+  background: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+}
+
+.ql-quest-actions button:focus-visible {
+  outline: 2px solid var(--ql-gold);
+  outline-offset: 1px;
+}
+
+.ql-empty {
+  padding: 0.75rem;
+  border-radius: 0.35rem;
+  border: 1px dashed rgba(92, 26, 43, 0.35);
+  color: var(--ql-muted);
+  font-style: italic;
+}
+
+.ql-lead {
+  margin: 0.35rem 0 0;
+  line-height: 1.5;
+}
+
+.ql-offline-fallback {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Heraldic toast (replaces window.alert) */
+.ql-toast-slot {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ql-toast-slot:not([hidden]) {
+  pointer-events: auto;
+}
+
+.ql-toast {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  max-width: 36rem;
+  width: calc(100% - 0.5rem);
+  margin: 0.35rem auto 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: 0.4rem;
+  border: 1px solid rgba(92, 26, 43, 0.45);
+  box-shadow: 0 0.4rem 1.1rem rgba(42, 33, 24, 0.18);
+  background: linear-gradient(180deg, rgba(255, 252, 245, 0.98), rgba(244, 228, 193, 0.96));
+}
+
+.ql-toast--warn {
+  border-color: rgba(92, 26, 43, 0.65);
+  background: linear-gradient(180deg, rgba(255, 245, 238, 0.99), rgba(255, 228, 210, 0.92));
+}
+
+.ql-toast-text {
+  margin: 0;
+  flex: 1 1 12rem;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: var(--ql-ink);
+}
+
+.ql-toast-actions {
+  flex-shrink: 0;
+}
+
+.ql-toast-dismiss {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.3rem;
+  border: 1px solid var(--ql-burgundy);
+  background: var(--ql-burgundy);
+  color: var(--ql-parchment);
+  cursor: pointer;
+}
+
+.ql-toast-dismiss:focus-visible {
+  outline: 2px solid var(--ql-gold);
+  outline-offset: 2px;
+}

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "bmad": {
+      "command": "npx",
+      "args": ["-y", "bmad-mcp"]
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "Quest Log",
+  "short_name": "Quest Log",
+  "description": "A todo application for the valiant and the organised.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1E1610",
+  "theme_color": "#1E1610",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

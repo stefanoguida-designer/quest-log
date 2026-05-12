@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#5c1a2b" />
+  <meta name="description" content="Quest Log — a journal for deeds yet undone." />
+  <title>Quest Log</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/assets/icons/icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/css/theme.css" />
+  <link rel="stylesheet" href="/css/motion.css" />
+  <script type="module" src="/js/main.js"></script>
+</head>
+<body>
+  <div class="ql-scroll" id="ql-app-root">
+    <div id="ql-toast-slot" class="ql-toast-slot" aria-live="polite" hidden></div>
+    <div id="ql-banner-slot" aria-live="polite"></div>
+    <header>
+      <h1 class="ql-title" id="ql-title">Quest Log</h1>
+      <p class="ql-sub" id="ql-sub">A journal for deeds yet undone.</p>
+    </header>
+
+    <section class="ql-panel" aria-labelledby="ql-form-heading">
+      <h2 class="sr-only" id="ql-form-heading">Inscribe a quest</h2>
+      <form id="ql-form" class="ql-form" autocomplete="off">
+        <label class="sr-only" for="ql-input">Name thy quest</label>
+        <input
+          id="ql-input"
+          class="ql-input"
+          name="title"
+          maxlength="200"
+          placeholder="Slay the dishes, seek the scroll…"
+          aria-describedby="ql-sub"
+        />
+        <button type="submit" class="ql-btn">Inscribe</button>
+      </form>
+
+      <h2 class="ql-section-title">Active quests</h2>
+      <div data-slot="active-empty"></div>
+      <div data-slot="active-list"></div>
+
+      <h2 class="ql-section-title">Completed quests</h2>
+      <div data-slot="completed-empty"></div>
+      <div data-slot="completed-list"></div>
+    </section>
+  </div>
+</body>
+</html>
