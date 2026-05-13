@@ -15,11 +15,12 @@ const COUNTDOWN_SECONDS = 5;
 
 let countdownTimer = null;
 let returnFocusTo = null;
+let keydownHandler = null;
 
 function popupHtml() {
   return `
 <div class="ql-king-overlay hidden" id="ql-king-overlay">
-  <div class="ql-king-popup">
+  <div class="ql-king-popup" role="dialog" aria-modal="true" aria-labelledby="ql-king-quote">
     <div class="ql-king-portrait-wrap">
       <img src="/assets/sprites/king.png" class="ql-king-portrait pixel-art" alt="The King" />
     </div>
@@ -37,6 +38,13 @@ function clearCountdown() {
   if (countdownTimer !== null) {
     window.clearInterval(countdownTimer);
     countdownTimer = null;
+  }
+}
+
+function clearKeydownHandler() {
+  if (keydownHandler) {
+    document.removeEventListener('keydown', keydownHandler, true);
+    keydownHandler = null;
   }
 }
 
@@ -69,6 +77,7 @@ function ensurePopup() {
 function closeKingPopup() {
   const popup = ensurePopup();
   clearCountdown();
+  clearKeydownHandler();
   popup?.overlay.classList.add('hidden');
 
   if (returnFocusTo && document.contains(returnFocusTo)) {
@@ -93,6 +102,32 @@ export function showKingPopup(focusTarget = null) {
   popup.overlay.classList.remove('hidden');
   popup.dismiss.onclick = closeKingPopup;
   popup.dismiss.focus();
+
+  clearKeydownHandler();
+  keydownHandler = (event) => {
+    if (event.key === 'Escape') {
+      closeKingPopup();
+      return;
+    }
+
+    if (event.key !== 'Tab') return;
+
+    const focusable = Array.from(
+      popup.overlay.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+    ).filter((el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'));
+    if (focusable.length === 0) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
+  document.addEventListener('keydown', keydownHandler, true);
 
   countdownTimer = window.setInterval(() => {
     remaining -= 1;

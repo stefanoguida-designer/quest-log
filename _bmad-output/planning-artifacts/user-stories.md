@@ -20,6 +20,8 @@ _Artifact referenced from `docs/PRD.md` frontmatter (`inputDocuments`). Engineer
 
 1. Given an active quest, when I activate its “complete” control, then it moves to the completed section and shows at least one completed visual treatment (strike, reduced luminance, or seal overlay) as required by FR-Q02.
 2. Given I reload the page, the quest remains in the completed section with the same title.
+3. Given an active quest is sealed complete, then a king completion popup appears as celebratory feedback and can be dismissed.
+4. Given reduced motion is enabled, then completion still works without relying on blocking animation.
 
 ## US-03 — Delete a quest
 
@@ -38,6 +40,7 @@ _Artifact referenced from `docs/PRD.md` frontmatter (`inputDocuments`). Engineer
 
 1. Both sections are visible and labelled (or visually distinct) on mobile and desktop breakpoints.
 2. Order is stable: newest active first (by creation); completed ordered by completion time (newest first) unless otherwise documented.
+3. Given a completed quest, when I activate “Reopen”, then the quest returns to the active list and remains active after reload.
 
 ## US-05 — Empty states
 
@@ -46,7 +49,7 @@ _Artifact referenced from `docs/PRD.md` frontmatter (`inputDocuments`). Engineer
 ### Acceptance criteria
 
 1. When there are zero active quests, the active empty state shows narrative copy within 80–220 characters and a visible control to create the first quest (FR-Q05).
-2. When there is at least one active quest but zero completed, the completed section shows distinct empty copy (FR-Q06).
+2. When there are zero completed quests, the completed section remains hidden; once at least one quest is completed, completed quests appear in their own section (FR-Q06).
 
 ## US-06 — Install PWA
 
@@ -62,3 +65,14 @@ _Artifact referenced from `docs/PRD.md` frontmatter (`inputDocuments`). Engineer
 
 1. After a warm load, with network disabled, the cached shell still loads from the service worker.
 2. While offline, create/complete/delete actions do not persist; a single status banner explains the realm is unreachable; reconnect + refresh restores persisted state.
+
+## Cross-cutting — Required UI states (FR-Q07)
+
+1. Given the app boots, then a loading state simulates the scroll being retrieved before the journal renders.
+2. Given `?error=1` is present, then the app shows a polished retrieval error state with a retry control.
+3. Given a storage save fails, then the app presents non-destructive error feedback instead of silently losing the user action.
+
+## Cross-cutting — Interaction states
+
+1. Primary, ghost, quest action, toast, modal, retry, and king-popup controls expose hover, active, focus-visible, and disabled states where applicable.
+2. Given the app is offline, then mutation controls are disabled and the offline banner explains why actions cannot persist.

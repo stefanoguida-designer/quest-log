@@ -21,7 +21,7 @@ _Use after `python3 -m http.server` and opening `http://localhost:8080/` (HTTPS 
 | --- | --- | --- |
 | Automated | axe full page scan on: empty list, list with active + completed quests | **Zero** serious / critical issues (PRD accessibility row in NFR summary) |
 | Keyboard | Tab through: input → Inscribe → first quest actions | Visible focus ring; no keyboard traps |
-| Contrast | Spot-check body text + buttons vs background (default theme) | Meets PRD accessibility intent (body text and controls readable on parchment) |
+| Contrast | Spot-check body text + buttons vs background (default theme) | Meets PRD accessibility intent (body text and controls readable on the dark pixel-dungeon theme) |
 
 ## Manual / PRD-specific
 

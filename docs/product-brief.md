@@ -4,7 +4,7 @@ _Version 1.0 — May 2026 · Author: Stefano_
 
 ## One-liner
 
-Quest Log is a **mobile-first PWA** that behaves like a personal todo list but reads and feels like an **adventurer’s journal** — parchment tones, heraldic tone of voice, short motion beats on complete/delete/add.
+Quest Log is a **mobile-first PWA** that behaves like a personal todo list but reads and feels like an **adventurer’s journal** — dark pixel-dungeon visuals, heraldic tone of voice, short motion beats on complete/delete/add.
 
 ## Problem
 
@@ -20,6 +20,7 @@ Mainstream todo apps are competent but emotionally flat. **I want this designer-
 - Single-page app: active + completed sections, local persistence (`localStorage`), installable PWA (manifest + service worker shell).
 - Core flows: add quest (with validation), complete (with optional motion), delete (with confirm), restore completed to active, empty states for both sections.
 - Offline **MVP:** after a successful online load, shell is cached; while offline, **mutations are disabled** with clear banner/toast — no fake “saved offline” queue for v1.
+- Visual theme: dark pixel dungeon — stone backgrounds, gold accents, Silkscreen font, pixel art sprites (torches, logo sigil, wood texture).
 
 ## Out of scope (v1)
 

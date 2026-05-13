@@ -41,7 +41,7 @@ The realm of personal productivity is vast and largely joyless. Applications tha
 ## Goals
 
 - Provide a fully functional todo application covering create, complete, delete, restore, and empty-state experiences.
-- Deliver a visually cohesive RPG fantasy aesthetic — parchment textures, medieval typography, heraldic details — without relying on heavy custom illustration.
+- Deliver a visually cohesive RPG fantasy aesthetic — dark pixel-dungeon surfaces, gold accents, heraldic copy, and pixel-art details — without relying on heavy custom illustration.
 - Ship as a PWA: installable, offline-capable shell, home-screen-ready.
 - Ensure a **responsive, polished** primary experience on mobile (touch targets, readable type), while remaining usable on desktop.
 - **Styling:** custom CSS with shared design tokens (colours, type, spacing); no mandatory CSS utility framework in the MVP bundle.
@@ -92,13 +92,18 @@ Full stories with acceptance criteria: [`_bmad-output/planning-artifacts/user-st
 ### Empty States
 
 - Active list empty: flavour text encouraging the adventurer to inscribe a first quest, plus a clear path to the input control.
-- Completed list empty: distinct copy when there are active quests but no completed ones.
+- Completed section: hidden until at least one quest is completed; completed quests are then listed separately from active quests.
+
+### Required UI States
+
+- Loading state: on boot, the prototype simulates data retrieval before rendering the journal.
+- Error state: the prototype exposes a considered retrieval/save failure state, including the demo path `?error=1`.
 
 ### PWA Requirements
 
 - **`manifest.webmanifest`** (linked from HTML as `manifest`) with name, short name, icons (including 192 and 512), theme/background colours, `display: standalone`, `start_url` and `scope`.
 - **Service worker** precaching the app shell; navigation fallback to **`offline.html`** when appropriate.
-- App icons: heraldic / scroll motif PNGs generated from the in-app logo as required by the manifest.
+- App icons: heraldic / scroll motif PNGs (`icon-192.png`, `icon-512.png`) generated from the in-app logo as required by the manifest.
 
 ### Requirement IDs (engineering traceability)
 
@@ -111,10 +116,11 @@ These IDs are **stable** and align with [`_bmad-output/planning-artifacts/archit
 | **FR-Q03** | Delete or restore: delete from active or completed (with confirm as implemented); restore completed → active. |
 | **FR-Q04** | Persistence: all user-visible mutations survive a full reload on the same device and profile; storage engine as specified under **Technical Constraints**. |
 | **FR-Q05** | Empty state when there are zero active quests (welcoming copy + affordance to add). |
-| **FR-Q06** | Empty state for completed section when nothing completed yet (distinct from FR-Q05). |
+| **FR-Q06** | Completed section visibility: completed quests appear in a separate section once at least one quest has been completed. |
 | **FR-P01** | PWA manifest (`manifest.webmanifest`) correctly linked; metadata for install. |
 | **FR-P02** | Service worker: versioned precache of shell URLs; offline navigation fallback where applicable. |
-| **FR-P03** | Icon set (SVG + 192/512 PNG, maskable entry for the manifest) for install surfaces. |
+| **FR-Q07** | Required UI states: loading state on boot and error state for retrieval/save failure paths, including the `?error=1` demo path. |
+| **FR-P03** | PNG icon set (`icon-192.png`, `icon-512.png`) and maskable manifest entry for install surfaces. |
 
 ---
 
@@ -149,16 +155,15 @@ Measurable NFRs below complement **Technical Constraints** (stack choices). Veri
 
 ### Visual Language
 
-**Fantasy classic.** Warm parchment backgrounds, aged paper textures achieved through CSS (gradients — optional noise). Gold and deep burgundy as primary accent colours. Forest green for success/completion accents where needed.
+**Dark pixel dungeon.** Stone backgrounds, dark panels, gold accents, wood texture, torch animation, logo sigil, and other pixel-art sprites create the chosen V1 aesthetic.
 
 ### Typography
 
-- Display / headings: **Cinzel** (or similar) from Google Fonts.
-- Body / UI: **Source Serif 4** (or similar) for legibility at small sizes.
+- UI and display: **Silkscreen** from Google Fonts, matching the pixel-art interface.
 
 ### Tone of Voice
 
-The application speaks in the manner of a royal herald or ancient tome. Task creation is "Inscribe." Empty states are narrated, not labelled. Validation and offline messages use the same register (toast/banner, not blocking system dialogs except optional delete confirm).
+The application speaks in the manner of a royal herald or ancient tome. The primary submit button stays direct ("Add") for immediate usability, while surrounding labels, empty states, validation, and offline messages use the same heraldic register (toast/banner, not blocking system dialogs except optional delete confirm).
 
 ### Key Interaction Moments
 

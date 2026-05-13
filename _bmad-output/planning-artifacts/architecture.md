@@ -24,7 +24,7 @@ _This document was produced from `docs/PRD.md` using the BMAD create-architectur
 | Area | IDs | Architectural implication |
 | --- | --- | --- |
 | Quest CRUD + persistence | FR-Q01–FR-Q04 | Single-page UI with explicit domain model for quests; synchronous persistence to browser storage on every mutation; deterministic ordering contract documented below. |
-| Empty states | FR-Q05, FR-Q06 | Dedicated view states in the render layer; copy lives in a single `strings` (or similar) module to keep tone consistent. |
+| Empty / section states | FR-Q05, FR-Q06 | Dedicated view states in the render layer; active empty copy and completed-section visibility live in the DOM render layer. |
 | PWA | FR-P01–FR-P03 | Static hosting–friendly layout: manifest, icons, and `sw.js` at known URLs; installability validated against PRD browser matrix. |
 | Motion | UX-MOT-01–UX-MOT-03 | CSS-first motion with `prefers-reduced-motion` guards; no layout-thrashing animations on the main thread beyond short transitions. |
 
@@ -105,7 +105,7 @@ There is no single vendor CLI. First implementation story creates the tree under
 
 **Important**
 
-4. Service worker update policy: **Manual refresh** after deploy — `skipWaiting: false` on `install` unless user confirms update (simplest for MVP). Document “hard refresh after deploy” in README.
+4. Service worker update policy: **Immediate activation** — `skipWaiting: true` during install via `self.skipWaiting()`, with `clients.claim()` on activate.
 5. Font loading: **Google Fonts link** in `index.html` with `font-display: swap`; limit to display + body weights documented in README.
 
 **Deferred**
@@ -130,7 +130,7 @@ There is no single vendor CLI. First implementation story creates the tree under
 
 ### Frontend architecture
 
-- **Modules:** `main.js` orchestrates; `state.js` + `storage.js` for persistence; `js/dom/*` builds DOM from state snapshot.
+- **Modules:** `main.js` orchestrates; `state.js` + `storage.js` for persistence; `js/dom/*` builds DOM from state snapshot; `js/modal.js` handles confirm dialogs; `js/king.js` handles celebratory completion feedback.
 - **State:** Single source of truth in memory mirroring last successful read/write to `localStorage`; re-read on `pageshow`/`visibilitychange` if another tab could exist (document single-tab assumption for MVP).
 - **Rendering:** Native DOM APIs (no virtual DOM library).
 
@@ -187,13 +187,15 @@ quest-log/
 ├── sw.js                      # service worker — precache + fetch handler
 ├── offline.html               # optional fallback shell (include in precache if present)
 ├── css/
-│   ├── theme.css              # CSS variables, parchment/noise base
+│   ├── theme.css              # CSS variables, dark pixel-dungeon theme
 │   └── motion.css             # UX-MOT-* animations + reduced-motion overrides
 ├── js/
 │   ├── main.js                # entry: bootstrap, listeners
 │   ├── state.js               # in-memory state + reducer-style mutations
 │   ├── storage.js             # localStorage read/write + migrate
 │   ├── strings.js             # copy / tone
+│   ├── modal.js               # custom confirm dialog
+│   ├── king.js                # completion celebration popup
 │   ├── dom/
 │   │   ├── render-list.js     # active + completed sections
 │   │   ├── render-empty.js
@@ -202,14 +204,22 @@ quest-log/
 │   └── pwa/
 │       └── register-sw.js     # registration + update UX hook
 └── assets/
-    └── icons/
-        ├── icon-192.png
-        └── icon-512.png
+    ├── icons/
+    │   ├── icon-192.png
+    │   └── icon-512.png
+    ├── sprites/
+    │   ├── logo.png
+    │   ├── king.png
+    │   ├── stone-tile.png
+    │   └── torch-spritesheet.png
+    └── ui/
+        ├── wood-tile.png
+        └── nail.png
 ```
 
 ### Precache list (authoritative for FR-P02)
 
-**Version:** `questlog-shell-v22` (bump when precache set changes).
+**Version:** `questlog-shell-v27` (bump when precache set changes).
 
 **URLs to precache (relative to origin `/`):**
 
@@ -220,6 +230,7 @@ quest-log/
 - `/css/theme.css`
 - `/css/motion.css`
 - `/js/main.js`
+- `/js/king.js`
 - `/js/modal.js`
 - `/js/state.js`
 - `/js/storage.js`
@@ -230,6 +241,8 @@ quest-log/
 - `/js/dom/render-chrome.js`
 - `/js/dom/render-toast.js`
 - `/js/pwa/register-sw.js`
+- `/assets/ui/wood-tile.png`
+- `/assets/ui/nail.png`
 - `/assets/icons/icon-192.png`
 - `/assets/icons/icon-512.png`
 
@@ -243,7 +256,8 @@ quest-log/
 | FR-Q02 | `state.js` + `dom/render-list.js` + `css/motion.css` |
 | FR-Q03 | `state.js` + `dom/render-list.js` |
 | FR-Q04 | `storage.js` + `state.js` |
-| FR-Q05, FR-Q06 | `dom/render-empty.js` + `strings.js` |
+| FR-Q05, FR-Q06 | `dom/render-empty.js` + `dom/render-list.js` + `strings.js` |
+| FR-Q07 | `main.js` + `strings.js` |
 | FR-P01 | `manifest.webmanifest` + `index.html` `<link rel="manifest">` |
 | FR-P02 | `sw.js` + `js/pwa/register-sw.js` |
 | FR-P03 | `assets/icons/*` |

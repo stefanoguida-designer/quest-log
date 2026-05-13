@@ -18,7 +18,7 @@ Primary references reviewed:
 
 Quest Log already has a memorable identity: compact mobile layout, dark pixel-dungeon atmosphere, gold accents, animated torches, and copy that turns ordinary todo actions into ritual. The app feels distinctive rather than generic.
 
-The main risk is drift. The live app has become a dark pixel-art dungeon UI, while parts of the PRD still describe a parchment / Cinzel / Source Serif fantasy classic direction. The code and docs also disagree on some PWA details, and the current manifest/service-worker references assets that are not present in the repository. That means the install/offline promise is weaker than the documentation suggests.
+The main risk identified during the audit was drift: the live app had become a dark pixel-art dungeon UI while parts of the PRD still described an older visual direction. The current BMAD artifacts should now treat dark pixel dungeon as the canonical V1 direction and keep PWA asset/cache details aligned with the code.
 
 The project can become design-complete by choosing one canonical visual direction, repairing the install/offline asset chain, tightening accessibility on controls and dialogs, and adding verification evidence to the docs.
 
@@ -50,15 +50,14 @@ Acceptance criteria:
 - After a warm load, offline reload preserves the logo, stone background, and torches or documents a deliberate fallback.
 - The verification checklist has a dated sign-off row for install/offline visual integrity.
 
-### 2. Choose and document the canonical visual direction
+### 2. Maintain the canonical visual direction
 
-Issue: `docs/PRD.md` describes warm parchment, Cinzel, Source Serif, burgundy, and forest green; the live app uses a dark dungeon pixel-art system with Silkscreen as the main UI font, stone texture, shield logo, and torch sprites. Both could work, but the project should not ask implementers to serve two visual languages.
+Issue: the live app uses a dark dungeon pixel-art system with Silkscreen as the main UI font, stone/wood textures, logo sigil, torch sprites, and a king completion popup. The project should keep all specs and artifact indexes aligned to that single visual language.
 
 Tasks:
 
-- Decide between “Dark Pixel Dungeon” and “Classic Parchment Heraldry” as the canonical V1 direction.
-- If keeping the current app direction, update PRD Design Direction, product brief wording, architecture visual notes, and README UX polish notes.
-- If reverting to the PRD direction, adjust `css/theme.css`, typography, background, and assets to match the parchment/heraldic brief.
+- Treat “Dark Pixel Dungeon” as the canonical V1 direction.
+- Keep PRD Design Direction, product brief wording, architecture visual notes, and README UX polish notes aligned when UI assets change.
 - Add a short visual foundation section with tokens for color, typography, texture, radius, border, spacing, and motion.
 
 Acceptance criteria:
