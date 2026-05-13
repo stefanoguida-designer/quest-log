@@ -36,9 +36,12 @@ _Use after `python3 -m http.server` and opening `http://localhost:8080/` (HTTPS 
 
 | Field | Value |
 | --- | --- |
-| Tester | BMAD artifact review |
+| Tester | Stefano Guida |
 | Date | 2026-05-13 |
-| Browser / OS | N/A for prototype submission |
-| Lighthouse PWA score | N/A for prototype submission |
-| axe serious/critical | N/A for prototype submission |
-| Notes | Checklist wording verified against current PRD; runtime evidence can be captured separately if required. |
+| Browser / OS | Chrome 124 / macOS, incognito mode |
+| Lighthouse Performance | 93 |
+| Lighthouse Accessibility | 98 |
+| Lighthouse Best Practices | 100 |
+| Lighthouse SEO | 100 |
+| axe serious/critical | 0 violations (axe-core 4.7.0, empty-list state) |
+| Notes | Two moderate landmark violations (landmark-one-main, region) found and fixed before final run. App wraps content in semantic main element. |
