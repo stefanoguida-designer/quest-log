@@ -4,7 +4,7 @@ export function initTorches() {
   const FRAME_W = 8;
   const FRAME_H = 16;
   const FRAMES = 5;
-  const SCALE = 3;
+  const SCALE = 2;
   const FPS = 6;
 
   const sheet = new Image();

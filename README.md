@@ -18,9 +18,22 @@ Then open [http://localhost:8080/](http://localhost:8080/).
 
 ## BMAD + Cursor (how I worked)
 
-1. **Specs first:** I wrote the product brief and PRD under `docs/`, then architecture and user stories under `_bmad-output/planning-artifacts/`, so I always had one trace chain before touching UI code (goals → FR/US IDs → files).
-2. **Cursor as editor + agent:** I used chats and Composer to implement the vanilla PWA (`js/`, `css/`, `sw.js`) against those specs; BMAD skills (for example PRD validation and architecture) helped me keep structure and quality gates visible.
-3. **Iteration:** When validation flagged gaps (dedicated NFR section, measurability), I tightened the PRD and checklists before adding behavior, instead of coding ahead of the spec.
+The workflow was conversational and iterative, not a one-shot generation:
+- **Claude as thinking partner:** I used Claude to refine scope, challenge assumptions, and translate design intent into structured prompts before touching Cursor. Each feature started as a conversation, not a ticket.
+- **Cursor Agent for implementation:** Once the spec was clear, I passed structured prompts to Cursor Agent to implement against the existing codebase — always scoped, always with explicit constraints (don't change unrelated files, keep existing class names, bump SW cache version).
+- **BMAD for structure:** BMAD personas (PM, Architect, UX Designer) kept the artifact chain visible — PRD → user stories → architecture → code — and surfaced gaps before they became bugs. The UX Designer audit mid-project caught P0 issues (missing PWA icons, stale docs) that would have affected the submission.
+- **Prompt engineering as design work:** Writing a good Cursor prompt is structurally similar to writing a good design brief — scope, constraints, acceptance criteria, examples. SDD made this explicit.
+
+## Visual design decisions
+
+The app uses a deliberate **dark pixel dungeon** aesthetic — a creative interpretation of the brief rather than a generic todo UI. Key decisions:
+
+- **Palette:** Deep stone blacks, warm gold accents, and muted cream text — a warm dark mode with a fantasy RPG feel.
+- **Pixel art assets:** Animated torch sprites (5-frame spritesheet, canvas-rendered at ×3 scale), a hand-crafted logo sigil, and a tiled stone background texture — all following a documented pixel art mobile workflow.
+- **Silkscreen font:** Chosen for its pixel-grid aesthetic and mobile readability at small sizes, used consistently across UI, modals, and error states.
+- **Custom modal system:** All native browser dialogs replaced with themed modals — `showConfirm()` and `showAlert()` — for a consistent in-world experience.
+
+These choices were made to demonstrate that SDD works equally well when the designer brings a strong visual direction — the specs constrained the implementation without constraining the aesthetic.
 
 ## What I learned
 
