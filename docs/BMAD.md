@@ -11,7 +11,7 @@ _Orientation doc only. The binding specifications are the **PRD**, **product bri
 | Architecture | [`../_bmad-output/planning-artifacts/architecture.md`](../_bmad-output/planning-artifacts/architecture.md) | ADRs, SW precache, FR → file mapping |
 | User stories + AC | [`../_bmad-output/planning-artifacts/user-stories.md`](../_bmad-output/planning-artifacts/user-stories.md) | US-01–US-06, testable acceptance criteria |
 | Verification checklist | [`../_bmad-output/planning-artifacts/verification-checklist.md`](../_bmad-output/planning-artifacts/verification-checklist.md) | Lighthouse, axe, manual checks |
-| Current PRD validation | [`../_bmad-output/planning-artifacts/PRD-validation-report-current.md`](../_bmad-output/planning-artifacts/PRD-validation-report-current.md) | Report dated 2026-05-12 (Warning; refresh recommended after final doc alignment) |
+| Current PRD validation | [`../_bmad-output/planning-artifacts/PRD-validation-report-current.md`](../_bmad-output/planning-artifacts/PRD-validation-report-current.md) | Report dated 2026-05-12 (PASS after final doc alignment) |
 | Optional backlog | [`optional-tasklist.md`](optional-tasklist.md) | Non-MVP improvements |
 | Final polish checklist | [`final-polish-tasklist.md`](final-polish-tasklist.md) | Structural doc closure (completed) |
 | Design / UX audit | [`design-ux-audit-tasklist.md`](design-ux-audit-tasklist.md) | Visual, usability, PWA asset, and documentation-readiness tasklist |
@@ -39,7 +39,7 @@ _Orientation doc only. The binding specifications are the **PRD**, **product bri
 | Service worker | `sw.js` |
 | Offline fallback | `offline.html` |
 | Icons | `assets/icons/*` |
-| Pixel art sprites | `assets/sprites/torch-spritesheet.png`, `assets/sprites/logo.png`, `assets/sprites/stone-tile.png` |
+| Pixel art sprites | `assets/sprites/torch-spritesheet.png`, `assets/sprites/logo.png`, `assets/sprites/stone-tile.png`, `assets/sprites/king.png` |
 | UI textures | `assets/ui/wood-tile.png`, `assets/ui/nail.png` |
 | PWA icons | `assets/icons/icon-192.png`, `assets/icons/icon-512.png` |
 
@@ -60,6 +60,6 @@ _Orientation doc only. The binding specifications are the **PRD**, **product bri
 | Fonts | Silkscreen (Google Fonts CDN) |
 | Completed section | Hidden until at least one completed quest exists in the current implementation |
 | Manifest file | `manifest.webmanifest` (not `manifest.json`) |
-| Service worker | `sw.js` at repo root, cache `questlog-shell-v27` |
+| Service worker | `sw.js` at repo root, cache `questlog-shell-v28` |
 | Service worker update | `skipWaiting: true`, `clients.claim()` on activate |
 | Visual theme | Dark pixel dungeon — stone, gold, cream palette with pixel art assets |

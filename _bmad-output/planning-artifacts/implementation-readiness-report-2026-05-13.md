@@ -125,11 +125,11 @@ Total NFRs: 9 extracted, including 6 stable NFR IDs and 3 additional project-typ
 
 | FR Number | PRD Requirement | Story Coverage | Status |
 | --- | --- | --- | --- |
-| FR1 / FR-Q01 | Create quest via button or Enter; trim / length validation; new row in active list. | US-01 AC1-AC3 | Covered |
+| FR1 / FR-Q01 | Create quest via button or Enter; trim / length validation; new row in active list. | US-01 AC1-AC4 | Covered |
 | FR2 / FR-Q02 | Complete quest; move active to completed with distinct visuals and reduced-motion-safe optional motion. | US-02 AC1-AC2 | Covered |
 | FR3 / FR-Q03 delete portion | Delete from active or completed with optional confirm. | US-03 AC1-AC2 | Covered |
 | FR4 / FR-Q03 restore portion | Restore completed quest to active. | US-04 AC3 | Covered |
-| FR5 / FR-Q04 | All user-visible mutations persist across full reload on same device/profile. | US-02 covers completed persistence; US-03 covers delete persistence. US-01 does not explicitly require add persistence; restore persistence is not covered. | Partial |
+| FR5 / FR-Q04 | All user-visible mutations persist across full reload on same device/profile. | US-01, US-02, US-03, US-04, and the cross-cutting persistence criteria cover create, complete, delete, and restore persistence through immediate `localStorage` writes. | Covered |
 | FR6 / FR-Q05 | Active-list empty state with welcoming copy and affordance to add. | US-05 AC1 | Covered |
 | FR7 / FR-Q06 | Completed section remains hidden until completed quests exist; completed quests then appear in their own section. | US-05 AC2 | Covered |
 | FR8 / FR-P01 | PWA manifest linked with install metadata. | US-06 AC1-AC2 | Covered |
@@ -141,19 +141,15 @@ Total NFRs: 9 extracted, including 6 stable NFR IDs and 3 additional project-typ
 
 #### High Priority Missing FRs
 
-None after the documentation alignment pass.
-
-FR5 / FR-Q04 full persistence coverage.
-- Impact: Persistence is tested for complete/delete, but not explicitly for create or restore. The PRD says all user-visible mutations persist.
-- Recommendation: Add persistence acceptance criteria to US-01 and the new restore criterion.
+None after the documentation alignment pass. FR5 / FR-Q04 now has explicit persistence coverage for create, complete, delete, and restore mutations.
 
 ### Coverage Statistics
 
 - Total PRD narrative FRs assessed: 11
-- Fully covered: 10
-- Partially covered: 1
+- Fully covered: 11
+- Partially covered: 0
 - Missing: 0
-- Coverage percentage: 91% fully covered, 100% at least partially covered
+- Coverage percentage: 100% fully covered
 
 ### Notes
 
@@ -175,10 +171,9 @@ Found with caveat.
    - PRD, product brief, BMAD index, UX audit, and architecture now identify dark pixel dungeon as the V1 visual direction.
    - Status: aligned.
 
-2. UX audit identifies a PWA/offline visual-assets concern that architecture only partially covers.
-   - Architecture precache list includes app shell JS/CSS and icons.
-   - UX audit says the visual sprites (`logo.png`, `stone-tile.png`, `torch-spritesheet.png`) should be precached if offline reload is expected to preserve designed appearance.
-   - Status: product decision needed: either precache visual sprites or document degraded offline appearance as acceptable.
+2. UX audit identified a PWA/offline visual-assets concern that is now resolved.
+   - Architecture and `sw.js` precache the app shell, icons, visual sprites (`logo.png`, `stone-tile.png`, `torch-spritesheet.png`, `king.png`), and UI textures (`wood-tile.png`, `nail.png`).
+   - Status: resolved.
 
 3. UX audit asks for a compact UX state inventory.
    - PRD and stories cover empty, loading, error, offline, core list states, but there is no single state inventory mapping trigger, copy source, visual treatment, accessibility notes, and verification method.
@@ -244,7 +239,7 @@ The stories are user-facing and not technical milestones. They map to user-visib
 
 ### Recommendation
 
-The story set is good enough for submission after the alignment pass. Remaining improvement: add explicit create-persistence wording if you want every persistence path named individually.
+The story set is good enough for submission after the alignment pass. Persistence coverage now names create, complete, delete, and restore mutations explicitly.
 
 ## Step 6: Summary and Recommendations
 
@@ -252,7 +247,7 @@ The story set is good enough for submission after the alignment pass. Remaining 
 
 READY WITH MINOR VERIFICATION GAPS
 
-The project is close to submission-ready as a working prototype, and the BMAD artifact set has been aligned to the current codebase. Remaining risks are verification evidence and a stale PRD validation report status, not major requirement/document contradictions.
+The project is close to submission-ready as a working prototype, and the BMAD artifact set has been aligned to the current codebase. Remaining risk is verification evidence, not major requirement/document contradictions.
 
 ### Critical Issues Requiring Immediate Action
 
@@ -261,8 +256,8 @@ The project is close to submission-ready as a working prototype, and the BMAD ar
    - Status: resolved.
 
 2. Service worker documentation is aligned against code.
-   - `sw.js` uses `questlog-shell-v27`.
-   - `docs/BMAD.md` and `architecture.md` now document `questlog-shell-v27`, `skipWaiting: true`, and `clients.claim()` on activate.
+   - `sw.js` uses `questlog-shell-v28`.
+   - `docs/BMAD.md` and `architecture.md` now document `questlog-shell-v28`, `skipWaiting: true`, and `clients.claim()` on activate.
    - Status: resolved.
 
 3. Completed-section behavior is aligned to current code.
@@ -279,8 +274,9 @@ The project is close to submission-ready as a working prototype, and the BMAD ar
 
 ### Major Issues
 
-1. `docs/BMAD.md` reports current PRD validation as "Pass", but `_bmad-output/planning-artifacts/PRD-validation-report-current.md` has `overallStatus: Warning`.
-   - Action: update BMAD's role text to "Warning" or refresh the validation report.
+1. Current PRD validation status is aligned.
+   - `docs/BMAD.md` reports current PRD validation as "Pass", and `_bmad-output/planning-artifacts/PRD-validation-report-current.md` has `overallStatus: PASS`.
+   - Status: resolved.
 
 2. Architecture precache list matches the requested current `sw.js` entries.
    - Current `sw.js` precaches `/js/king.js`, `/assets/ui/wood-tile.png`, and `/assets/ui/nail.png`.
@@ -304,8 +300,8 @@ The project is close to submission-ready as a working prototype, and the BMAD ar
 2. PRD, product brief, UX audit, and BMAD repeat visual direction in slightly different language.
    - Recommendation: consolidate visual foundation into one short section, likely in PRD or a dedicated UX/design note, and link to it.
 
-3. Historical PRD validation reports are clearly marked, but current validation is stale.
-   - Recommendation: rerun or manually refresh `PRD-validation-report-current.md` after final doc edits.
+3. Historical PRD validation reports are clearly marked and the current validation report is refreshed.
+   - Recommendation: keep `PRD-validation-report-current.md` in sync after any future PRD edits.
 
 4. Verification checklist exists but no dated Lighthouse/axe/browser sign-off is attached in the artifact set.
    - Recommendation: record final manual checks before submission.
@@ -319,13 +315,13 @@ The project is close to submission-ready as a working prototype, and the BMAD ar
    - keyboard path and reduced motion
    - Lighthouse PWA/performance and axe accessibility, if available
 
-2. Update `docs/BMAD.md` current PRD validation status from "Pass" to "Warning", or regenerate the current validation report and then update the index accordingly.
+2. Keep `docs/BMAD.md` current PRD validation status aligned if the validation report is rerun in the future.
 
-3. Optionally add explicit create-persistence acceptance wording to US-01.
+3. Maintain explicit persistence acceptance wording for all create, complete, delete, and restore mutations.
 
 ### Final Note
 
-This assessment originally identified 12 issues across 5 categories: visual/spec alignment, story traceability, service-worker/PWA documentation, code-vs-doc behavior, and documentation consolidation. The current artifact alignment pass resolves the major documentation contradictions; remaining work is evidence capture and optional validation-report refresh.
+This assessment originally identified 12 issues across 5 categories: visual/spec alignment, story traceability, service-worker/PWA documentation, code-vs-doc behavior, and documentation consolidation. The current artifact alignment pass resolves the major documentation contradictions; remaining work is evidence capture and keeping validation artifacts synchronized after future edits.
 
 Assessor: BMAD Implementation Readiness workflow, 2026-05-13.
 

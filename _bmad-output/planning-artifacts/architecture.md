@@ -35,7 +35,7 @@ _This document was produced from `docs/PRD.md` using the BMAD create-architectur
 | NFR-PERF-01 / NFR-PERF-02 | Minimal JS, no framework runtime; small precache set; font subsetting or limited weights; avoid large third-party scripts beyond **Google Fonts** (styling is custom CSS, no utility CSS framework in the bundle). |
 | NFR-A11Y-01 / NFR-A11Y-02 | Semantic HTML for lists/forms; visible focus; keyboard paths for create/complete/delete; colour tokens defined once and reused. |
 | NFR-OFF-01 | **MVP decision (chosen):** After warm load, service worker serves cached shell. While offline, **mutations that require persistence are blocked** with a single inline status banner (“The realm lies beyond reach…”); no silent data loss. On reconnect, user refreshes or we dispatch a soft `visibilitychange` reload of persisted state from `localStorage`. (Fits `localStorage`-only storage; avoids fake “saved” offline state.) Document this in README and manual test script. |
-| NFR-SEC-01 | No auth, no third-party keys in repo; telemetry off unless explicitly added later. |
+| Security guardrail | No auth, no third-party keys in repo; telemetry off unless explicitly added later. |
 
 **Scale and complexity**
 
@@ -77,7 +77,7 @@ _This document was produced from `docs/PRD.md` using the BMAD create-architectur
 
 **Initialization command**
 
-There is no single vendor CLI. First implementation story creates the tree under **Project structure** and wires `index.html` → ES modules.
+There is no single vendor CLI. The implemented app uses the hand-authored tree under **Project structure** and wires `index.html` → ES modules directly.
 
 **Styling (current implementation)**
 
@@ -183,7 +183,7 @@ There is no single vendor CLI. First implementation story creates the tree under
 quest-log/
 ├── README.md
 ├── index.html                 # shell, fonts, module entry (custom CSS links)
-├── manifest.webmanifest       # PWA manifest (PRD also allows manifest.json naming)
+├── manifest.webmanifest       # PWA manifest
 ├── sw.js                      # service worker — precache + fetch handler
 ├── offline.html               # optional fallback shell (include in precache if present)
 ├── css/
@@ -219,7 +219,7 @@ quest-log/
 
 ### Precache list (authoritative for FR-P02)
 
-**Version:** `questlog-shell-v27` (bump when precache set changes).
+**Version:** `questlog-shell-v28` (bump when precache set changes).
 
 **URLs to precache (relative to origin `/`):**
 
@@ -241,6 +241,10 @@ quest-log/
 - `/js/dom/render-chrome.js`
 - `/js/dom/render-toast.js`
 - `/js/pwa/register-sw.js`
+- `/assets/sprites/logo.png`
+- `/assets/sprites/stone-tile.png`
+- `/assets/sprites/torch-spritesheet.png`
+- `/assets/sprites/king.png`
 - `/assets/ui/wood-tile.png`
 - `/assets/ui/nail.png`
 - `/assets/icons/icon-192.png`
@@ -274,7 +278,7 @@ quest-log/
 ### Requirements coverage
 
 - All FR-Q / FR-P rows have a owning module or asset path (IDs **defined in `docs/PRD.md`** — section *Requirement IDs*).
-- NFR-PERF / A11Y / OFF / SEC addressed in decisions above or explicitly deferred with rationale.
+- NFR-PERF / A11Y / OFF and security guardrails are addressed in decisions above or explicitly deferred with rationale.
 
 ### Gaps / follow-ups
 
@@ -289,8 +293,7 @@ Architecture for **Quest log** MVP is **complete** relative to `docs/PRD.md`.
 
 **Suggested next steps**
 
-1. Run **`bmad-create-story`** / implementation skill to generate the first dev story: “Static shell + `storage.js` + list render”.
-2. Keep [`_bmad-output/planning-artifacts/user-stories.md`](user-stories.md) aligned with PRD acceptance criteria as scope changes.
-3. After first deploy, attach Lighthouse + axe artefacts to release notes per NFR success methods.
+1. Keep [`_bmad-output/planning-artifacts/user-stories.md`](user-stories.md) aligned with PRD acceptance criteria as scope changes.
+2. After final verification, attach Lighthouse + axe artefacts or manual-check evidence to release notes per NFR success methods.
 
 If you want this broken into the per-step A/P/C collaborative run instead of a single artefact, say so and we can replay any step with deeper options.

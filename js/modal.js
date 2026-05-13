@@ -57,7 +57,7 @@ function showDialog(message, options) {
     const close = (value) => {
       confirm.onclick = null;
       cancel.onclick = null;
-      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('keydown', onKeyDown, true);
       overlay.hidden = true;
       if (previousFocus?.isConnected) previousFocus.focus();
       resolve(value);
@@ -70,12 +70,32 @@ function showDialog(message, options) {
       close(false);
     };
     const onKeyDown = (event) => {
-      if (event.key === 'Escape') close(false);
+      if (event.key === 'Escape') {
+        close(false);
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+
+      const focusable = Array.from(
+        overlay.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+      ).filter((el) => !el.hasAttribute('disabled') && !el.hasAttribute('hidden') && !el.getAttribute('aria-hidden'));
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
 
     confirm.onclick = onConfirm;
     cancel.onclick = onCancel;
-    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('keydown', onKeyDown, true);
   });
 }
 

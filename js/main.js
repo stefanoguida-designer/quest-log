@@ -40,7 +40,7 @@ function wait(ms) {
 /** @param {HTMLElement} root */
 function showLoadingState(root) {
   root.innerHTML = `
-<div class="ql-loading">
+<div class="ql-loading" role="status" aria-live="polite">
   <p class="ql-loading-text">Retrieving the scroll...</p>
   <div class="ql-progress-track">
     <div class="ql-progress-bar" id="ql-progress-bar"></div>
@@ -126,14 +126,18 @@ function showErrorState(root, onRetry) {
   if (completedList) completedList.innerHTML = '';
 
   activeList.innerHTML = `
-<div class="ql-error-state">
+<div class="ql-error-state" role="alert">
   <p class="ql-error-icon">⚠</p>
   <p class="ql-error-title">The scroll could not be retrieved.</p>
   <p class="ql-error-message">A shadow has fallen upon the archive. Try again.</p>
   <button class="ql-btn ql-btn--ghost ql-error-retry" type="button">Retry</button>
 </div>`;
 
-  activeList.querySelector('.ql-error-retry')?.addEventListener('click', onRetry);
+  const retryButton = activeList.querySelector('.ql-error-retry');
+  if (retryButton instanceof HTMLButtonElement) {
+    retryButton.addEventListener('click', onRetry);
+    retryButton.focus();
+  }
 }
 
 /** @param {HTMLElement} root */
@@ -168,7 +172,12 @@ function rerender(root) {
     },
     onDelete: async (id) => {
       if (!online()) return;
-      if (!(await showConfirm(strings.deleteConfirm))) return;
+      const confirmed = await showConfirm(strings.deleteConfirm);
+      if (!confirmed) return;
+      if (!online()) {
+        showToast(strings.offlineBanner, { variant: 'warn' });
+        return;
+      }
       const esc = escapeForSelector(id);
       const li =
         root.querySelector(`#ql-quest-list-active li[data-quest-id="${esc}"]`) ||

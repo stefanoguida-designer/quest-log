@@ -11,7 +11,7 @@ _Checklist I used to close the last documentation-quality gaps (FR traceability,
 
 - [x] **README / product brief** — They already pointed at `optional-tasklist.md`; links to `BMAD.md` are valid (`docs/`, now an index).
 - [x] **Current PRD validation report** — I added [`_bmad-output/planning-artifacts/PRD-validation-report-current.md`](../_bmad-output/planning-artifacts/PRD-validation-report-current.md) (2026-05-12, **Pass** with minor warnings). The `bmad-validate-prd` CLI plus `resolve_customization.py` needs **Python 3.11+**; where that was unavailable I still ran an equivalent structured review.
-- [x] **Historical PRD validation reports** — I added “historical” banners at the top of `docs/PRD-validation-report.md` and `docs/PRD-v2-validation-report.md`.
+- [x] **Historical PRD validation reports** — I added “historical” banners and archived them at `_bmad-output/archive/PRD-validation-report.md` and `_bmad-output/archive/PRD-v2-validation-report.md`.
 
 ## Optional (outside this checklist)
 

@@ -32,16 +32,16 @@ The project can become design-complete by choosing one canonical visual directio
 
 ## P0 — Must fix before calling the design complete
 
-### 1. Repair PWA install and offline asset integrity
+### 1. Repair PWA install and offline asset integrity — resolved
 
-Issue: `manifest.webmanifest` and `sw.js` should keep referencing the generated `/assets/icons/icon-192.png` and `/assets/icons/icon-512.png` files. The app also uses `assets/sprites/logo.png`, `stone-tile.png`, and `torch-spritesheet.png`, but those visual assets are not in the precache list.
+Status: **Resolved**. `manifest.webmanifest` and `sw.js` reference the generated `/assets/icons/icon-192.png` and `/assets/icons/icon-512.png` files, and `sw.js` now precaches the live visual assets (`logo.png`, `stone-tile.png`, `torch-spritesheet.png`, `king.png`) plus UI textures (`wood-tile.png`, `nail.png`) under cache `questlog-shell-v28`.
 
 Tasks:
 
-- Keep `assets/icons/icon-192.png` and `assets/icons/icon-512.png` generated from the canonical logo source.
-- Add the live visual sprites to the precache list if the offline shell is meant to retain its designed appearance.
-- Bump the service-worker cache name after changing the precache set.
-- Update `docs/BMAD.md`, `README.md`, `architecture.md`, and `optional-tasklist.md` so they describe the real icon and cache behavior.
+- Done — keep `assets/icons/icon-192.png` and `assets/icons/icon-512.png` generated from the canonical logo source.
+- Done — live visual sprites and UI textures are in the precache list so the offline shell retains its designed appearance after warm load.
+- Done — service-worker cache name is `questlog-shell-v28`.
+- Done — `docs/BMAD.md`, `README.md`, `architecture.md`, and `optional-tasklist.md` describe the current icon and cache behavior.
 
 Acceptance criteria:
 
@@ -68,14 +68,14 @@ Acceptance criteria:
 
 ## P1 — Should fix for a polished user experience
 
-### 3. Unify core action copy
+### 3. Unify core action copy — partially resolved
 
-Issue: `js/strings.js` defines `addButton: 'Inscribe'`, but `index.html` renders the submit button as “Add”. The modal uses generic “Confirm” and “Cancel”. The empty/error strings are mostly thematic, but validation has at least one hardcoded plain string in `js/main.js`.
+Status: **Resolved for add button and validation copy**. `js/strings.js` now defines `addButton: 'Add'`, `index.html` renders the submit button text from `strings.addButton`, and validation copy lives in `js/strings.js`. Remaining copy polish: modal action labels still use generic “Confirm” and “Cancel”.
 
 Tasks:
 
-- Render the submit button text from `strings.addButton`, or remove the unused string and choose “Add” deliberately.
-- Move hardcoded validation and dialog labels into `js/strings.js`.
+- Done — render the submit button text from `strings.addButton` and choose “Add” deliberately.
+- Done — validation labels live in `js/strings.js`; modal action labels remain a separate polish item.
 - Rename modal actions to match the fantasy tone where clarity allows, for example “Abandon” / “Keep quest”.
 - Keep destructive actions explicit; do not let flavour obscure consequences.
 
@@ -87,14 +87,14 @@ Acceptance criteria:
 
 ### 4. Improve accessibility and touch ergonomics
 
-Issue: The app has good foundations, but several interaction details need an audit pass. Quest action buttons appear below the 44px touch-target target, the modal lacks a labelled dialog title/description relationship, focus is not trapped inside the modal, animated torches do not currently check reduced motion, and toast focus behavior may be disruptive.
+Issue: The app has good foundations, but several interaction details need an audit pass. Quest action buttons appear below the 44px touch-target target, the modal lacks a labelled dialog title/description relationship, focus is not trapped inside the modal, and toast focus behavior may be disruptive. **Resolved:** decorative torches now check `prefers-reduced-motion: reduce` and render a static first frame instead of animating.
 
 Tasks:
 
 - Set quest action controls to a minimum 44px touch target or provide equivalent spacing.
 - Add dialog labelling (`aria-labelledby` or `aria-describedby`) and a focus trap for the custom modal.
 - Re-check toast semantics: one live announcement path, dismissable by keyboard, no surprise focus steal unless the message requires immediate action.
-- Stop or simplify torch animation when `prefers-reduced-motion: reduce` is active.
+- Done — stop torch animation and render a static first frame when `prefers-reduced-motion: reduce` is active.
 - Verify that offline disabled states do not make important controls such as toast dismiss impossible to operate.
 
 Acceptance criteria:
@@ -151,15 +151,15 @@ Acceptance criteria:
 - A future agent can update a state without searching multiple files to infer design intent.
 - Every state maps to one or more files and at least one manual verification step.
 
-### 8. Refresh documentation truthfulness
+### 8. Refresh documentation truthfulness — resolved for current validation/cache refs
 
-Issue: `_bmad-output/planning-artifacts/PRD-validation-report-current.md` still reports gaps that the current `docs/PRD.md` appears to have partially addressed, such as a dedicated Non-Functional Requirements section. Keep architecture and `docs/BMAD.md` cache-version notes aligned with `sw.js`.
+Status: **Resolved for current PRD validation and service-worker cache references**. `_bmad-output/planning-artifacts/PRD-validation-report-current.md` now reports `overallStatus: PASS`, and architecture / `docs/BMAD.md` align with `sw.js` cache `questlog-shell-v28`.
 
 Tasks:
 
-- Re-run or manually refresh the current PRD validation report.
-- Update architecture cache version references after service-worker changes.
-- Keep historical validation reports clearly marked as historical.
+- Done — current PRD validation report is refreshed.
+- Done — architecture cache version references match `sw.js`.
+- Done — historical validation reports are being kept as archive/audit trail material.
 - Add a design-decision note for the selected visual direction.
 
 Acceptance criteria:
@@ -170,19 +170,19 @@ Acceptance criteria:
 
 ### 9. Clean stale or misleading implementation artifacts
 
-Issue: `styles.css` appears to be a legacy stylesheet, is not linked from `index.html`, and references `assets/ui/*` paths that do not exist. `js/modal.js` logs confirm/cancel clicks to the console. These are small, but they reduce confidence in the polish level.
+Issue: `styles.css` appears to be a legacy stylesheet, is not linked from `index.html`, and references asset paths that do not match the current sprite/UI asset layout. These are small, but they reduce confidence in the polish level.
 
 Tasks:
 
 - Remove `styles.css` if it is no longer used, or rename/archive it as design history.
-- Remove console logging from modal interaction handlers.
-- Review unused copy keys such as `strings.addButton` after CTA alignment.
+- Keep modal interaction handlers free of routine console logging.
+- Done — `strings.addButton` is used for the chosen “Add” CTA.
 
 Acceptance criteria:
 
 - No stale stylesheet points to nonexistent assets.
 - No routine user interaction emits console noise.
-- Unused or duplicate copy is removed.
+- No unused or duplicate create-CTA copy remains.
 
 ## Final design-readiness checklist
 

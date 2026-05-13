@@ -8,7 +8,8 @@ _Minor or “nice to have” tasks after the MVP prototype. None of these block 
 | --- | --- |
 | OB-13 | **Done** — FR-Q / FR-P table in [`PRD.md`](PRD.md); aligned with `architecture.md`. |
 | OB-14 | **Done** — [`BMAD.md`](BMAD.md) rewritten as index + file mapping + current decisions. |
-| OB-15 | **Done** — “Historical” banners on the two archived PRD validation reports under `docs/`. |
+| OB-15 | **Done** — “Historical” banners on the two archived PRD validation reports now under `_bmad-output/archive/`. |
+| OB-03 | **Done** — `sw.js` already uses `skipWaiting` during install and `clients.claim()` on activate for immediate activation. |
 
 Execution detail: [`final-polish-tasklist.md`](final-polish-tasklist.md).
 
@@ -24,7 +25,6 @@ Suggested priority for the remainder: **P1** useful for demo / review · **P2** 
 | --- | --- | --- |
 | OB-01 | P2 | **iOS meta tags** (`apple-mobile-web-app-capable`, `apple-touch-icon`, status bar) for a more coherent install / standalone experience on Safari — not yet in `index.html`. |
 | OB-02 | P2 | Dedicated **maskable** icon (today the manifest reuses `icon-512` as `maskable`; fine for MVP, refine safe zone later). |
-| OB-03 | P3 | **Service worker update** strategy (`skipWaiting`, “New version” prompt) beyond the README “hard refresh after deploy”. |
 
 ## Performance and network
 

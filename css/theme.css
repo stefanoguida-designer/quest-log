@@ -222,6 +222,13 @@ header {
   transform: translateY(1px);
 }
 
+.ql-btn:disabled,
+.ql-btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  filter: none;
+}
+
 .ql-btn--ghost {
   background: transparent;
   color: var(--ql-gold);
@@ -406,6 +413,8 @@ header {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--ql-cream);
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .ql-quest-meta {
@@ -447,6 +456,12 @@ header {
 
 .ql-quest-actions button:active {
   transform: translateY(1px);
+}
+
+.ql-quest-actions button:disabled,
+.ql-quest-actions button[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .ql-empty {
