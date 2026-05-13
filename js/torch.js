@@ -3,7 +3,7 @@ export function initTorches() {
   const SHEET_SRC = '/assets/sprites/torch-spritesheet.png';
   const FRAME_W = 8;
   const FRAME_H = 16;
-  const FRAMES = 4;
+  const FRAMES = 5;
   const SCALE = 3;
   const FPS = 6;
 

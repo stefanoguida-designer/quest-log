@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Quest Log">
-  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4e4c1"/><stop offset="1" stop-color="#d4c4a1"/></linearGradient></defs>
-  <path fill="url(#g)" stroke="#5c1a2b" stroke-width="2" d="M8 8h48v20c0 16-10 28-24 32C18 56 8 44 8 28V8z"/>
-  <path fill="#c9a227" d="M22 22h20v4H22zm0 10h20v4H22z"/>
-</svg>

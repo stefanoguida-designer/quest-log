@@ -203,14 +203,13 @@ quest-log/
 │       └── register-sw.js     # registration + update UX hook
 └── assets/
     └── icons/
-        ├── icon.svg
         ├── icon-192.png
         └── icon-512.png
 ```
 
 ### Precache list (authoritative for FR-P02)
 
-**Version:** `questlog-shell-v2` (bump when precache set changes).
+**Version:** `questlog-shell-v19` (bump when precache set changes).
 
 **URLs to precache (relative to origin `/`):**
 
@@ -229,7 +228,6 @@ quest-log/
 - `/js/dom/render-chrome.js`
 - `/js/dom/render-toast.js`
 - `/js/pwa/register-sw.js`
-- `/assets/icons/icon.svg`
 - `/assets/icons/icon-192.png`
 - `/assets/icons/icon-512.png`
 

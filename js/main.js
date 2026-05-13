@@ -12,8 +12,11 @@ import { renderQuestLists } from './dom/render-list.js';
 import { renderConnectivityBanner } from './dom/render-chrome.js';
 import { emptyActiveHtml, emptyCompletedHtml } from './dom/render-empty.js';
 import { showToast } from './dom/render-toast.js';
+import { showConfirm } from './modal.js';
 import { registerServiceWorker } from './pwa/register-sw.js';
 import { initTorches } from './torch.js';
+
+const LOADING_DELAY_MS = 1500;
 
 function online() {
   return navigator.onLine;
@@ -21,6 +24,31 @@ function online() {
 
 function prefersReducedMotion() {
   return window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+}
+
+function demoErrorEnabled() {
+  return new URLSearchParams(window.location.search).get('error') === '1';
+}
+
+function wait(ms) {
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, ms);
+  });
+}
+
+/** @param {HTMLElement} root */
+function showLoadingState(root) {
+  root.innerHTML = `
+<div class="ql-loading">
+  <p class="ql-loading-text">Retrieving the scroll...</p>
+  <div class="ql-progress-track">
+    <div class="ql-progress-bar" id="ql-progress-bar"></div>
+  </div>
+</div>`;
+  const progressBar = /** @type {HTMLElement | null} */ (root.querySelector('#ql-progress-bar'));
+  window.requestAnimationFrame(() => {
+    if (progressBar) progressBar.style.width = '100%';
+  });
 }
 
 /** @param {string} id */
@@ -60,6 +88,32 @@ function runAfterMotion(root, id, fn) {
 }
 
 /** @param {HTMLElement} root */
+function showErrorState(root) {
+  const activeEmpty = root.querySelector('[data-slot="active-empty"]');
+  const activeList = root.querySelector('[data-slot="active-list"]');
+  const completedEmpty = root.querySelector('[data-slot="completed-empty"]');
+  const completedList = root.querySelector('[data-slot="completed-list"]');
+
+  if (!activeList) return;
+
+  if (activeEmpty) activeEmpty.innerHTML = '';
+  if (completedEmpty) completedEmpty.innerHTML = '';
+  if (completedList) completedList.innerHTML = '';
+
+  activeList.innerHTML = `
+<div class="ql-error-state">
+  <p class="ql-error-icon">⚠</p>
+  <p class="ql-error-title">The scroll could not be retrieved.</p>
+  <p class="ql-error-message">A shadow has fallen upon the archive. Try again.</p>
+  <button class="ql-btn ql-error-retry" type="button">Retry</button>
+</div>`;
+
+  activeList.querySelector('.ql-error-retry')?.addEventListener('click', () => {
+    rerender(root);
+  });
+}
+
+/** @param {HTMLElement} root */
 function rerender(root) {
   const state = getState();
   renderConnectivityBanner(online(), strings.offlineBanner);
@@ -85,9 +139,9 @@ function rerender(root) {
       li.classList.add('ql-motion-seal');
       runAfterMotion(root, id, () => completeQuest(id));
     },
-    onDelete: (id) => {
+    onDelete: async (id) => {
       if (!online()) return;
-      if (!window.confirm(strings.deleteConfirm)) return;
+      if (!(await showConfirm(strings.deleteConfirm))) return;
       const esc = escapeForSelector(id);
       const li =
         root.querySelector(`#ql-quest-list-active li[data-quest-id="${esc}"]`) ||
@@ -110,17 +164,20 @@ function rerender(root) {
   });
 }
 
-function boot() {
-  const root = document.getElementById('ql-app-root');
+/** @param {HTMLElement} root */
+function bindApp(root) {
   const form = document.getElementById('ql-form');
   const input = document.getElementById('ql-input');
+  const inputError = document.getElementById('ql-input-error');
 
-  if (!root || !form || !input) return;
+  if (!form || !input) return;
 
   input.placeholder = strings.inputPlaceholder;
+  input.removeAttribute('required');
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    input.removeAttribute('required');
     if (!online()) {
       showToast(strings.offlineBanner, { variant: 'warn' });
       return;
@@ -128,9 +185,14 @@ function boot() {
     const raw = input.value;
     const title = raw.trim();
     if (!title) {
-      showToast(strings.validationEmpty, { variant: 'warn' });
+      if (inputError) {
+        inputError.textContent = 'Quest name required.';
+      }
+      input.classList.add('ql-input--error');
       return;
     }
+    if (inputError) inputError.textContent = '';
+    input.classList.remove('ql-input--error');
     if (title.length > 200) {
       showToast(strings.validationLong, { variant: 'warn' });
       return;
@@ -151,7 +213,11 @@ function boot() {
   });
 
   subscribe(() => rerender(root));
-  rerender(root);
+  if (demoErrorEnabled()) {
+    showErrorState(root);
+  } else {
+    rerender(root);
+  }
 
   window.addEventListener('online', () => rerender(root));
   window.addEventListener('offline', () => rerender(root));
@@ -163,4 +229,20 @@ function boot() {
   initTorches();
 }
 
-boot();
+async function boot() {
+  const root = document.getElementById('ql-app-root');
+
+  if (!root) return;
+
+  const appHtml = root.innerHTML;
+  showLoadingState(root);
+  await wait(LOADING_DELAY_MS);
+  root.innerHTML = appHtml;
+  bindApp(root);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', boot, { once: true });
+} else {
+  boot();
+}

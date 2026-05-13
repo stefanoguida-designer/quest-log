@@ -98,7 +98,7 @@ Full stories with acceptance criteria: [`_bmad-output/planning-artifacts/user-st
 
 - **`manifest.webmanifest`** (linked from HTML as `manifest`) with name, short name, icons (including 192 and 512), theme/background colours, `display: standalone`, `start_url` and `scope`.
 - **Service worker** precaching the app shell; navigation fallback to **`offline.html`** when appropriate.
-- App icons: heraldic / scroll motif (SVG + PNGs as required by the manifest).
+- App icons: heraldic / scroll motif PNGs generated from the in-app logo as required by the manifest.
 
 ### Requirement IDs (engineering traceability)
 

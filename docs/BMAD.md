@@ -14,6 +14,7 @@ _Orientation doc only. The binding specifications are the **PRD**, **product bri
 | Current PRD validation | [`../_bmad-output/planning-artifacts/PRD-validation-report-current.md`](../_bmad-output/planning-artifacts/PRD-validation-report-current.md) | Report dated 2026-05-12 (Pass) |
 | Optional backlog | [`optional-tasklist.md`](optional-tasklist.md) | Non-MVP improvements |
 | Final polish checklist | [`final-polish-tasklist.md`](final-polish-tasklist.md) | Structural doc closure (completed) |
+| Design / UX audit | [`design-ux-audit-tasklist.md`](design-ux-audit-tasklist.md) | Visual, usability, PWA asset, and documentation-readiness tasklist |
 
 ## Component inventory ↔ files (as implemented)
 
@@ -54,7 +55,7 @@ _Orientation doc only. The binding specifications are the **PRD**, **product bri
 | Delete | Confirmation via `window.confirm`, consistent with the PRD |
 | Completed section | Always visible with its own empty state (not collapsed) |
 | Manifest file | `manifest.webmanifest` (not `manifest.json`) |
-| Service worker | `sw.js` at repo root, cache `questlog-shell-v2` |
+| Service worker | `sw.js` at repo root, cache `questlog-shell-v19` |
 
 ## Historical note
 

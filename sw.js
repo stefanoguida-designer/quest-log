@@ -1,5 +1,5 @@
 /* Quest Log — service worker (precache shell). Bump CACHE when precache list changes. */
-const CACHE = 'questlog-shell-v2';
+const CACHE = 'questlog-shell-v19';
 
 const PRECACHE_URLS = [
   '/',
@@ -9,6 +9,7 @@ const PRECACHE_URLS = [
   '/css/theme.css',
   '/css/motion.css',
   '/js/main.js',
+  '/js/modal.js',
   '/js/state.js',
   '/js/storage.js',
   '/js/strings.js',
@@ -17,12 +18,12 @@ const PRECACHE_URLS = [
   '/js/dom/render-chrome.js',
   '/js/dom/render-toast.js',
   '/js/pwa/register-sw.js',
-  '/assets/icons/icon.svg',
   '/assets/icons/icon-192.png',
   '/assets/icons/icon-512.png',
 ];
 
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches
       .open(CACHE)
@@ -39,7 +40,7 @@ self.addEventListener('activate', (event) => {
           return undefined;
         })
       )
-    )
+    ).then(() => clients.claim())
   );
 });
 

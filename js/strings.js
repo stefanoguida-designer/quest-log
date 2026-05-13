@@ -6,7 +6,7 @@ export const strings = {
     'The realm lies beyond reach — the chronicle cannot be inscribed until your connection returns.',
   addButton: 'Inscribe',
   inputLabel: 'Name thy quest',
-  inputPlaceholder: 'Slay the dishes, seek the scroll…',
+  inputPlaceholder: 'Name thy quest…',
   activeHeading: 'Active quests',
   completedHeading: 'Completed quests',
   emptyActive:

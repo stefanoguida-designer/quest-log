@@ -40,6 +40,7 @@ Then open [http://localhost:8080/](http://localhost:8080/).
 | Verification checklist | `_bmad-output/planning-artifacts/verification-checklist.md` |
 | BMAD index (artifacts + mapping) | [`docs/BMAD.md`](docs/BMAD.md) |
 | Final polish checklist | [`docs/final-polish-tasklist.md`](docs/final-polish-tasklist.md) |
+| Design / UX audit | [`docs/design-ux-audit-tasklist.md`](docs/design-ux-audit-tasklist.md) |
 | Latest PRD validation | [`_bmad-output/planning-artifacts/PRD-validation-report-current.md`](_bmad-output/planning-artifacts/PRD-validation-report-current.md) |
 | Optional backlog | [`docs/optional-tasklist.md`](docs/optional-tasklist.md) |
 
@@ -54,7 +55,7 @@ After a successful load, the service worker precaches the app shell. While **off
 
 ## PWA notes
 
-- Icons: `assets/icons/` (SVG + generated PNGs for install).
+- Icons: `assets/icons/` (generated PNGs from `assets/sprites/logo.png` for favicon and install).
 - Styling is **custom CSS** (`css/theme.css`, `css/motion.css`) with shared tokens — no Tailwind/runtime CSS framework in the bundle, for a smaller critical path and simpler offline behavior.
 
 ## Verification

@@ -7,11 +7,11 @@
   <meta name="description" content="Quest Log — a journal for deeds yet undone." />
   <title>Quest Log</title>
   <link rel="manifest" href="/manifest.webmanifest" />
-  <link rel="icon" href="/assets/icons/icon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/assets/icons/icon-192.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Silkscreen:wght@400;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="/css/theme.css" />
@@ -23,6 +23,9 @@
     <div id="ql-toast-slot" class="ql-toast-slot" aria-live="polite" hidden></div>
     <div id="ql-banner-slot" aria-live="polite"></div>
     <header>
+      <div class="ql-logo-wrap">
+        <img src="/assets/sprites/logo.png" class="ql-logo pixel-art" alt="Quest Log sigil" />
+      </div>
       <div class="ql-title-row">
         <canvas class="torch" width="24" height="48" data-delay="0"></canvas>
         <h1 class="ql-title" id="ql-title">Quest Log</h1>
@@ -31,22 +34,23 @@
       <p class="ql-sub" id="ql-sub">A journal for deeds yet undone.</p>
     </header>
 
-    <section class="ql-panel" aria-labelledby="ql-form-heading">
-      <h2 class="sr-only" id="ql-form-heading">Inscribe a quest</h2>
-      <form id="ql-form" class="ql-form" autocomplete="off">
-        <label class="sr-only" for="ql-input">Name thy quest</label>
-        <input
-          id="ql-input"
-          class="ql-input"
-          name="title"
-          maxlength="200"
-          placeholder="Slay the dishes, seek the scroll…"
-          aria-describedby="ql-sub"
-        />
-        <button type="submit" class="ql-btn">Inscribe</button>
-      </form>
+    <h2 class="sr-only" id="ql-form-heading">Inscribe a quest</h2>
+    <form id="ql-form" class="ql-form" autocomplete="off" aria-labelledby="ql-form-heading">
+      <label class="sr-only" for="ql-input">Name thy quest</label>
+      <input
+        id="ql-input"
+        class="ql-input"
+        name="title"
+        maxlength="200"
+        placeholder="Name thy quest…"
+        aria-describedby="ql-sub ql-input-error"
+      />
+      <button type="submit" class="ql-btn">Add</button>
+      <p class="ql-input-error" id="ql-input-error" aria-live="polite"></p>
+    </form>
 
-      <h2 class="ql-section-title">Active quests</h2>
+    <section class="ql-panel" aria-labelledby="ql-active-heading">
+      <h2 class="ql-section-title" id="ql-active-heading">Active quests</h2>
       <div data-slot="active-empty"></div>
       <div data-slot="active-list"></div>
 

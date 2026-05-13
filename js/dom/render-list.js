@@ -2,7 +2,7 @@ import { strings } from '../strings.js';
 
 /**
  * @param {import('../storage.js').AppState} state
- * @param {{ onComplete: (id: string) => void, onDelete: (id: string) => void, onRestore: (id: string) => void }} handlers
+ * @param {{ onComplete: (id: string) => void, onDelete: (id: string) => void | Promise<void>, onRestore: (id: string) => void }} handlers
  */
 export function renderQuestLists(root, state, handlers) {
   const activeHtml =
@@ -13,13 +13,13 @@ export function renderQuestLists(root, state, handlers) {
         .map(
           (q) => `
         <li class="ql-quest" data-quest-id="${q.id}">
-          <div>
-            <p class="ql-quest-title">${escapeHtml(q.title)}</p>
+          <div class="ql-quest-body">
+            <span class="ql-quest-title">${escapeHtml(q.title)}</span>
             <p class="ql-quest-meta">${formatWhen(q.createdAt)}</p>
           </div>
           <div class="ql-quest-actions">
-            <button type="button" data-action="complete" data-id="${q.id}">${strings.complete}</button>
-            <button type="button" class="ql-btn--ghost" data-action="delete" data-id="${q.id}">${strings.delete}</button>
+            <button type="button" data-action="toggle-complete" data-id="${q.id}">${strings.complete}</button>
+            <button type="button" class="ql-btn--ghost" data-action="abandon" data-id="${q.id}">${strings.delete}</button>
           </div>
         </li>`
         )
@@ -34,13 +34,13 @@ export function renderQuestLists(root, state, handlers) {
         .map(
           (q) => `
         <li class="ql-quest ql-quest--complete" data-quest-id="${q.id}">
-          <div>
-            <p class="ql-quest-title">${escapeHtml(q.title)}</p>
+          <div class="ql-quest-body">
+            <span class="ql-quest-title">${escapeHtml(q.title)}</span>
             <p class="ql-quest-meta">${formatWhen(q.completedAt || q.createdAt)}</p>
           </div>
           <div class="ql-quest-actions">
-            <button type="button" data-action="restore" data-id="${q.id}">${strings.restore}</button>
-            <button type="button" class="ql-btn--ghost" data-action="delete" data-id="${q.id}">${strings.delete}</button>
+            <button type="button" data-action="toggle-complete" data-id="${q.id}">${strings.restore}</button>
+            <button type="button" class="ql-btn--ghost" data-action="abandon" data-id="${q.id}">${strings.delete}</button>
           </div>
         </li>`
         )
@@ -60,9 +60,15 @@ export function renderQuestLists(root, state, handlers) {
       const id = el.dataset.id;
       const action = el.dataset.action;
       if (!id || !action) return;
-      if (action === 'complete') handlers.onComplete(id);
-      if (action === 'delete') handlers.onDelete(id);
-      if (action === 'restore') handlers.onRestore(id);
+      if (action === 'toggle-complete') {
+        const questEl = el.closest('.ql-quest');
+        if (questEl?.classList.contains('ql-quest--complete')) {
+          handlers.onRestore(id);
+        } else {
+          handlers.onComplete(id);
+        }
+      }
+      if (action === 'abandon') handlers.onDelete(id);
     });
   });
 }
