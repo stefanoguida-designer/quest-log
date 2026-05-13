@@ -1,3 +1,9 @@
+const preloadKing = new Image();
+preloadKing.src = '/assets/sprites/king.png';
+
+const preloadAlternativeKing = new Image();
+preloadAlternativeKing.src = '/assets/sprites/alternative-king.png';
+
 const KING_QUOTES = [
   '«Thou hast served the crown with honour. We are most grateful.»',
   '«The kingdom owes thee a debt, brave knight.»',
