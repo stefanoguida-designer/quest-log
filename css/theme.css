@@ -620,6 +620,15 @@ header {
   cursor: pointer;
 }
 
+.ql-toast-dismiss:hover {
+  filter: brightness(1.15);
+}
+
+.ql-toast-dismiss:active {
+  filter: brightness(0.9);
+  transform: translateY(1px);
+}
+
 .ql-toast-dismiss:focus-visible {
   outline: 2px solid var(--ql-gold);
   outline-offset: 2px;

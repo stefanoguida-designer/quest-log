@@ -1,5 +1,5 @@
 /* Quest Log — service worker (precache shell). Bump CACHE when precache list changes. */
-const CACHE = 'questlog-shell-v30';
+const CACHE = 'questlog-shell-v31';
 
 const PRECACHE_URLS = [
   '/',
