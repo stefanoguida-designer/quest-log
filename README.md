@@ -2,6 +2,8 @@
 
 PWA todo list framed as an adventurer’s journal. I keep product definition in [`docs/PRD.md`](docs/PRD.md). Architecture and planning artifacts live under [`_bmad-output/planning-artifacts/`](_bmad-output/planning-artifacts/).
 
+**Live demo:** [quest-log-amber-sigma.vercel.app](https://quest-log-amber-sigma.vercel.app)
+
 ## Run locally
 
 Service workers require **http(s)** — do not open `index.html` as a `file://` URL.
@@ -30,6 +32,9 @@ The app uses a deliberate **dark pixel dungeon** aesthetic — a creative interp
 
 - **Palette:** Deep stone blacks, warm gold accents, and muted cream text — a warm dark mode with a fantasy RPG feel.
 - **Pixel art assets:** Animated torch sprites (5-frame spritesheet, canvas-rendered at ×3 scale), a hand-crafted logo sigil, and a tiled stone background texture — all following a documented pixel art mobile workflow.
+
+The torch spritesheet, logo sigil, and wood texture were drawn by the author — a pixel art illustrator — and integrated into the prototype as production-ready assets following a documented pixel art mobile workflow.
+
 - **Silkscreen font:** Chosen for its pixel-grid aesthetic and mobile readability at small sizes, used consistently across UI, modals, and error states.
 - **Custom modal system:** All native browser dialogs replaced with themed modals — `showConfirm()` and `showAlert()` — for a consistent in-world experience.
 
@@ -41,6 +46,7 @@ These choices were made to demonstrate that SDD works equally well when the desi
 - **Offline still needs a story without a backend:** For a `localStorage` MVP, blocking mutations offline (banner + toast) was clearer and safer than implying a sync queue I was not going to build.
 - **Tooling depends on the machine:** Full `bmad-validate-prd` automation expects Python **3.11+** for the customization resolver; when that was missing, I still got value from a structured manual validation (`PRD-validation-report-current.md`).
 - **The README is part of the deliverable:** A short artifact map plus this reflection turns the folder into evidence for the course, not only runnable code.
+- **SDD works with strong creative direction:** the spec chain (PRD → stories → architecture) did not constrain the visual identity — it freed it. Knowing the boundaries clearly made it easier to push creatively within them.
 
 ## AI / BMAD integration
 
@@ -65,6 +71,9 @@ After a successful load, the service worker precaches the app shell. While **off
 
 - **Motion:** completing a quest plays a short seal animation; deleting fades the row. New quests can play an unfurl animation after submit. All respect `prefers-reduced-motion`.
 - **Toasts:** validation and offline messages use an in-page heraldic toast (not `window.alert`); dismiss with **Understood** or **Escape**.
+- **King completion popup:** every time a quest is marked complete, a pixel art king portrait appears with a randomly selected royal commendation. The popup auto-dismisses after 5 seconds or can be closed manually. The contrast between the king's solemnity and the mundanity of the task is intentional.
+- **Animated torches:** two 5-frame pixel art torch sprites flank the title, rendered via canvas at ×2 scale with staggered timing for a natural flicker effect.
+- **Wood texture empty state:** the active quest list uses a tiled pixel art wood plank texture when empty, evoking a bare notice board waiting for quests.
 
 ## PWA notes
 
