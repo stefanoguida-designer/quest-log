@@ -86,6 +86,16 @@ function pickPopupVariant() {
   return roll === 1 ? 'alternative' : 'king';
 }
 
+function applyPopupVariant(portrait, variantConfig) {
+  portrait.setAttribute('src', variantConfig.imageSrc);
+  portrait.alt = variantConfig.imageAlt;
+  if (variantConfig.imageAriaLabel) {
+    portrait.setAttribute('aria-label', variantConfig.imageAriaLabel);
+  } else {
+    portrait.removeAttribute('aria-label');
+  }
+}
+
 function ensurePopup() {
   let overlay = document.getElementById('ql-king-overlay');
   if (!overlay) {
@@ -134,13 +144,7 @@ export function showKingPopup(focusTarget = null) {
   returnFocusTo = focusTarget;
 
   let remaining = COUNTDOWN_SECONDS;
-  popup.portrait.src = variantConfig.imageSrc;
-  popup.portrait.alt = variantConfig.imageAlt;
-  if (variantConfig.imageAriaLabel) {
-    popup.portrait.setAttribute('aria-label', variantConfig.imageAriaLabel);
-  } else {
-    popup.portrait.removeAttribute('aria-label');
-  }
+  applyPopupVariant(popup.portrait, variantConfig);
   popup.quote.textContent = randomQuote(variantConfig.quotes);
   popup.countdown.textContent = String(remaining);
   popup.overlay.classList.remove('hidden');
