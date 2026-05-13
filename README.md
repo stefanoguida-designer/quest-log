@@ -48,6 +48,17 @@ These choices were made to demonstrate that SDD works equally well when the desi
 - **The README is part of the deliverable:** A short artifact map plus this reflection turns the folder into evidence for the course, not only runnable code.
 - **SDD works with strong creative direction:** the spec chain (PRD → stories → architecture) did not constrain the visual identity — it freed it. Knowing the boundaries clearly made it easier to push creatively within them.
 
+## AI integration logs
+
+- The full BMAD planning pipeline was AI-driven: product brief, PRD, architecture, and user stories each generated via the corresponding BMAD skill (PM, Architect, UX Designer personas)
+- Each feature was implemented using structured Cursor Agent prompts derived from the BMAD specs — scope, constraints, and acceptance criteria defined before any code was written
+- `bmad-check-implementation-readiness` was run twice mid-project, catching doc drift and stale references before submission
+- `bmad-code-review` was run iteratively across four passes, surfacing and resolving accessibility gaps (modal focus trap, toast focus restoration, aria-hidden torches, landmark violations), PWA issues (SW registration timing, missing sprite precache), and interaction state coverage
+- `bmad-review-adversarial-general` audited the full document set for redundancy and staleness, resulting in two historical validation reports being archived and four artifacts updated
+- Lighthouse and axe audits were run against the live Vercel deployment; two moderate axe violations (landmark-one-main, region) were found and fixed before the final verification run
+- Claude acted as thinking partner throughout — refining prompts, translating design intent into structured Cursor instructions, and maintaining awareness of the full artifact chain across sessions
+- AI handled single-feature changes well; prompts spanning multiple files required tighter scoping and explicit "do not change unrelated files" constraints to avoid unintended side effects
+
 ## AI / BMAD integration
 
 | Artifact | Path |
