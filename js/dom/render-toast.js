@@ -36,12 +36,13 @@ export function showToast(message, opts = {}) {
 
   dismissToast();
 
+  slot.setAttribute('aria-live', 'polite');
+  slot.setAttribute('role', 'status');
   slot.hidden = false;
   slot.innerHTML = '';
 
   const toast = document.createElement('div');
   toast.className = `ql-toast ql-toast--${variant}`;
-  toast.setAttribute('role', 'status');
 
   const text = document.createElement('p');
   text.className = 'ql-toast-text';

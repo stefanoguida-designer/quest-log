@@ -209,7 +209,7 @@ quest-log/
 
 ### Precache list (authoritative for FR-P02)
 
-**Version:** `questlog-shell-v19` (bump when precache set changes).
+**Version:** `questlog-shell-v22` (bump when precache set changes).
 
 **URLs to precache (relative to origin `/`):**
 
@@ -220,9 +220,11 @@ quest-log/
 - `/css/theme.css`
 - `/css/motion.css`
 - `/js/main.js`
+- `/js/modal.js`
 - `/js/state.js`
 - `/js/storage.js`
 - `/js/strings.js`
+- `/js/torch.js`
 - `/js/dom/render-list.js`
 - `/js/dom/render-empty.js`
 - `/js/dom/render-chrome.js`

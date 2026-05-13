@@ -4,7 +4,7 @@ export const strings = {
   subtitle: 'A journal for deeds yet undone.',
   offlineBanner:
     'The realm lies beyond reach — the chronicle cannot be inscribed until your connection returns.',
-  addButton: 'Inscribe',
+  addButton: 'Add',
   inputLabel: 'Name thy quest',
   inputPlaceholder: 'Name thy quest…',
   activeHeading: 'Active quests',
@@ -16,7 +16,7 @@ export const strings = {
   delete: 'Abandon',
   complete: 'Seal complete',
   restore: 'Reopen',
-  validationEmpty: 'The quill finds nothing to record.',
+  validationEmpty: 'Quest name required.',
   validationLong: 'This chronicle entry exceeds what the realm allows (200 characters).',
   deleteConfirm: 'Cast this entry from the record forever?',
   toastDismiss: 'Understood',

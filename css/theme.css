@@ -193,6 +193,7 @@ header {
 
 .ql-btn {
   min-height: 2.75rem;
+  min-width: 2.75rem;
   padding: 0 1rem;
   border-radius: 0.35rem;
   border: none;
@@ -344,6 +345,8 @@ header {
 
 .ql-quest-actions button {
   flex: 1;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
   font: inherit;
   font-family: 'Silkscreen', monospace;
   font-size: 0.8rem;
@@ -495,6 +498,8 @@ header {
 }
 
 .ql-toast-dismiss {
+  min-height: 2.75rem;
+  min-width: 2.75rem;
   font-family: 'Cinzel', serif;
   font-size: 0.8rem;
   font-weight: 600;

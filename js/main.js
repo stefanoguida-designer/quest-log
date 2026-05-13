@@ -186,7 +186,9 @@ function bindApp(root, options = {}) {
 
   if (!form || !input) return;
 
+  const addButton = form.querySelector('button[type="submit"]');
   input.placeholder = strings.inputPlaceholder;
+  if (addButton) addButton.textContent = strings.addButton;
   input.removeAttribute('required');
 
   form.addEventListener('submit', (e) => {
@@ -200,7 +202,7 @@ function bindApp(root, options = {}) {
     const title = raw.trim();
     if (!title) {
       if (inputError) {
-        inputError.textContent = 'Quest name required.';
+        inputError.textContent = strings.validationEmpty;
       }
       input.classList.add('ql-input--error');
       return;

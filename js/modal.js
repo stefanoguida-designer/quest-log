@@ -7,7 +7,7 @@ function getModalElements() {
     const template = document.createElement('template');
     template.innerHTML = `
 <div class="ql-modal-overlay" id="ql-modal-overlay">
-  <div class="ql-modal" role="dialog" aria-modal="true">
+  <div class="ql-modal" role="dialog" aria-modal="true" aria-labelledby="ql-modal-message">
     <p class="ql-modal-message" id="ql-modal-message"></p>
     <div class="ql-modal-actions">
       <button type="button" class="ql-btn ql-modal-confirm">Confirm</button>
@@ -50,7 +50,8 @@ function showDialog(message, options) {
   confirm.textContent = options.confirmLabel;
   cancel.hidden = !options.showCancel;
   overlay.hidden = false;
-  confirm.focus();
+  const firstButton = overlay.querySelector('button:not([hidden])');
+  if (firstButton instanceof HTMLButtonElement) firstButton.focus();
 
   return new Promise((resolve) => {
     const close = (value) => {
@@ -58,16 +59,14 @@ function showDialog(message, options) {
       cancel.onclick = null;
       document.removeEventListener('keydown', onKeyDown);
       overlay.hidden = true;
-      previousFocus?.focus();
+      if (previousFocus?.isConnected) previousFocus.focus();
       resolve(value);
     };
 
     const onConfirm = () => {
-      console.log('confirm clicked');
       close(true);
     };
     const onCancel = () => {
-      console.log('cancel clicked');
       close(false);
     };
     const onKeyDown = (event) => {

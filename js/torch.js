@@ -26,6 +26,18 @@ export function initTorches() {
     const w = FRAME_W * SCALE;
     const h = FRAME_H * SCALE;
 
+    function drawFrame(s, frame) {
+      if (!s.ctx) return;
+      s.ctx.clearRect(0, 0, w, h);
+      s.ctx.imageSmoothingEnabled = false;
+      s.ctx.drawImage(sheet, frame * FRAME_W, 0, FRAME_W, FRAME_H, 0, 0, w, h);
+    }
+
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) {
+      states.forEach((s) => drawFrame(s, 0));
+      return;
+    }
+
     function tick(ts) {
       states.forEach((s) => {
         if (!s.ctx) return;
@@ -34,9 +46,7 @@ export function initTorches() {
         if (effectiveTs - s.lastTick >= interval) {
           s.frame = (s.frame + 1) % FRAMES;
           s.lastTick = effectiveTs;
-          s.ctx.clearRect(0, 0, w, h);
-          s.ctx.imageSmoothingEnabled = false;
-          s.ctx.drawImage(sheet, s.frame * FRAME_W, 0, FRAME_W, FRAME_H, 0, 0, w, h);
+          drawFrame(s, s.frame);
         }
       });
       requestAnimationFrame(tick);

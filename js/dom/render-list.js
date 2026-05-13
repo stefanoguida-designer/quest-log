@@ -10,19 +10,20 @@ export function renderQuestLists(root, state, handlers) {
       ? ''
       : `<ul class="ql-list" id="ql-quest-list-active" aria-label="${strings.activeHeading}">
       ${state.active
-        .map(
-          (q) => `
+        .map((q) => {
+          const title = escapeHtml(q.title);
+          return `
         <li class="ql-quest" data-quest-id="${q.id}">
           <div class="ql-quest-body">
-            <span class="ql-quest-title">${escapeHtml(q.title)}</span>
+            <span class="ql-quest-title">${title}</span>
             <p class="ql-quest-meta">${formatWhen(q.createdAt)}</p>
           </div>
           <div class="ql-quest-actions">
-            <button type="button" data-action="toggle-complete" data-id="${q.id}">${strings.complete}</button>
-            <button type="button" class="ql-btn--ghost" data-action="abandon" data-id="${q.id}">${strings.delete}</button>
+            <button type="button" data-action="toggle-complete" data-id="${q.id}" aria-label="Mark ${title} as complete">${strings.complete}</button>
+            <button type="button" class="ql-btn--ghost" data-action="abandon" data-id="${q.id}" aria-label="Abandon ${title}">${strings.delete}</button>
           </div>
-        </li>`
-        )
+        </li>`;
+        })
         .join('')}
     </ul>`;
 
@@ -31,19 +32,20 @@ export function renderQuestLists(root, state, handlers) {
       ? ''
       : `<ul class="ql-list" id="ql-quest-list-completed" aria-label="${strings.completedHeading}">
       ${state.completed
-        .map(
-          (q) => `
+        .map((q) => {
+          const title = escapeHtml(q.title);
+          return `
         <li class="ql-quest ql-quest--complete" data-quest-id="${q.id}">
           <div class="ql-quest-body">
-            <span class="ql-quest-title">${escapeHtml(q.title)}</span>
+            <span class="ql-quest-title">${title}</span>
             <p class="ql-quest-meta">${formatWhen(q.completedAt || q.createdAt)}</p>
           </div>
           <div class="ql-quest-actions">
-            <button type="button" data-action="toggle-complete" data-id="${q.id}">${strings.restore}</button>
-            <button type="button" class="ql-btn--ghost" data-action="abandon" data-id="${q.id}">${strings.delete}</button>
+            <button type="button" data-action="toggle-complete" data-id="${q.id}" aria-label="Reopen ${title}">${strings.restore}</button>
+            <button type="button" class="ql-btn--ghost" data-action="abandon" data-id="${q.id}" aria-label="Abandon ${title}">${strings.delete}</button>
           </div>
-        </li>`
-        )
+        </li>`;
+        })
         .join('')}
     </ul>`;
 

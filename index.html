@@ -20,7 +20,7 @@
 </head>
 <body>
   <div class="ql-scroll" id="ql-app-root">
-    <div id="ql-toast-slot" class="ql-toast-slot" aria-live="polite" hidden></div>
+    <div id="ql-toast-slot" class="ql-toast-slot" aria-live="polite" role="status" hidden></div>
     <div id="ql-banner-slot" aria-live="polite"></div>
     <header>
       <div class="ql-logo-wrap">
@@ -42,10 +42,9 @@
         class="ql-input"
         name="title"
         maxlength="200"
-        placeholder="Name thy quest…"
         aria-describedby="ql-sub ql-input-error"
       />
-      <button type="submit" class="ql-btn">Add</button>
+      <button type="submit" class="ql-btn"></button>
       <p class="ql-input-error" id="ql-input-error" aria-live="polite"></p>
     </form>
 

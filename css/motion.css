@@ -49,4 +49,8 @@
   .ql-motion-delete {
     animation: none !important;
   }
+
+  .ql-progress-bar {
+    transition: none !important;
+  }
 }

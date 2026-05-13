@@ -58,5 +58,5 @@ _Orientation doc only. The binding specifications are the **PRD**, **product bri
 | Fonts | Silkscreen (Google Fonts CDN) |
 | Completed section | Always visible with its own empty state (not collapsed) |
 | Manifest file | `manifest.webmanifest` (not `manifest.json`) |
-| Service worker | `sw.js` at repo root, cache `questlog-shell-v20` |
+| Service worker | `sw.js` at repo root, cache `questlog-shell-v22` |
 | Visual theme | Dark pixel dungeon — stone, gold, cream palette with pixel art assets |
