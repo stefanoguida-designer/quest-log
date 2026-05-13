@@ -448,7 +448,7 @@ header {
   outline-offset: 1px;
 }
 
-.ql-quest-actions button:hover {
+.ql-quest-actions button:not(:disabled):hover {
   border-color: var(--ql-gold);
   color: var(--ql-gold);
   cursor: pointer;

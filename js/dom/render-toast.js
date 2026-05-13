@@ -4,12 +4,29 @@ const TOAST_DURATION_MS = 5200;
 let hideTimer = 0;
 /** @type {((e: KeyboardEvent) => void) | null} */
 let escapeHandler = null;
+/** @type {Element | null} */
+let focusRestoreTarget = null;
 
 function clearTimer() {
   if (hideTimer) {
     window.clearTimeout(hideTimer);
     hideTimer = 0;
   }
+}
+
+/** @param {HTMLElement | null} toastSlot */
+function restoreFocus(toastSlot) {
+  if (!focusRestoreTarget) return;
+
+  const activeElement = document.activeElement;
+  const shouldRestore = activeElement === document.body
+    || Boolean(toastSlot && activeElement && toastSlot.contains(activeElement));
+  const target = focusRestoreTarget && document.contains(focusRestoreTarget)
+    ? focusRestoreTarget
+    : document.body;
+
+  focusRestoreTarget = null;
+  if (shouldRestore && target instanceof HTMLElement) target.focus();
 }
 
 export function dismissToast() {
@@ -20,8 +37,11 @@ export function dismissToast() {
   }
   const slot = document.getElementById('ql-toast-slot');
   if (slot) {
+    restoreFocus(slot);
     slot.innerHTML = '';
     slot.hidden = true;
+  } else {
+    restoreFocus(null);
   }
 }
 
@@ -62,6 +82,7 @@ export function showToast(message, opts = {}) {
   toast.appendChild(actions);
   slot.appendChild(toast);
 
+  focusRestoreTarget = document.activeElement;
   dismiss.focus();
 
   escapeHandler = (e) => {
