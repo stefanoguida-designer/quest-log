@@ -110,6 +110,12 @@ header {
     inset 0 1px 0 rgba(201, 162, 39, 0.1);
 }
 
+.ql-panel--error {
+  border-color: #8b1a2a;
+  background: rgba(139, 26, 42, 0.18);
+  box-shadow: 0 0 0 1px #8b1a2a;
+}
+
 .ql-loading {
   display: flex;
   flex-direction: column;
@@ -203,6 +209,16 @@ header {
 .ql-btn:focus-visible {
   outline: 2px solid var(--ql-gold);
   outline-offset: 2px;
+}
+
+.ql-btn:hover {
+  filter: brightness(1.15);
+  cursor: pointer;
+}
+
+.ql-btn:active {
+  filter: brightness(0.9);
+  transform: translateY(1px);
 }
 
 .ql-btn--ghost {
@@ -344,6 +360,16 @@ header {
   outline-offset: 1px;
 }
 
+.ql-quest-actions button:hover {
+  border-color: var(--ql-gold);
+  color: var(--ql-gold);
+  cursor: pointer;
+}
+
+.ql-quest-actions button:active {
+  transform: translateY(1px);
+}
+
 .ql-empty {
   padding: 0.75rem;
   border-radius: 0.35rem;
@@ -359,10 +385,7 @@ header {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  padding: 1rem;
-  border-radius: 0.35rem;
-  border: 1px solid var(--ql-red);
-  background: rgba(139, 26, 42, 0.18);
+  padding: 0.5rem 0;
   text-align: center;
 }
 
@@ -417,6 +440,10 @@ header {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+.hidden {
+  display: none !important;
 }
 
 /* Heraldic toast (replaces window.alert) */

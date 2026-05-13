@@ -31,17 +31,21 @@ _Orientation doc only. The binding specifications are the **PRD**, **product bri
 | Empty states | `js/dom/render-empty.js` |
 | Offline banner | `js/dom/render-chrome.js` |
 | Heraldic toast | `js/dom/render-toast.js` |
+| Torch animation | `js/torch.js` |
+| Custom modal | `js/modal.js` |
 | Service worker registration | `js/pwa/register-sw.js` |
 | Manifest | `manifest.webmanifest` |
 | Service worker | `sw.js` |
 | Offline fallback | `offline.html` |
 | Icons | `assets/icons/*` |
+| Pixel art sprites | `assets/sprites/torch-spritesheet.png`, `assets/sprites/logo.png`, `assets/sprites/stone-tile.png` |
+| PWA icons | `assets/icons/icon-192.png`, `assets/icons/icon-512.png` |
 
 ## Primary flows (aligned with code)
 
 1. **Add** — Form submit → validation (empty / length) → `addQuest` → toast on error; unfurl animation when motion is allowed.
 2. **Complete** — “Seal complete” control (when online) → seal animation or immediate update if reduced motion → `completeQuest`.
-3. **Delete** — Browser `confirm` → delete animation → `deleteQuest`.
+3. **Delete** — `deleteQuest`.
 4. **Restore** — From completed back to active → `uncompleteQuest`.
 5. **Offline** — Banner + disabled action buttons; toast if a mutation is attempted.
 
@@ -51,12 +55,8 @@ _Orientation doc only. The binding specifications are the **PRD**, **product bri
 | --- | --- |
 | Stack | Vanilla JS, ES modules, no UI framework |
 | CSS | Custom (`ql-*`, `:root` tokens); no Tailwind in the MVP bundle |
-| Fonts | Cinzel + Source Serif 4 (Google Fonts CDN) |
-| Delete | Confirmation via `window.confirm`, consistent with the PRD |
+| Fonts | Silkscreen (Google Fonts CDN) |
 | Completed section | Always visible with its own empty state (not collapsed) |
 | Manifest file | `manifest.webmanifest` (not `manifest.json`) |
-| Service worker | `sw.js` at repo root, cache `questlog-shell-v19` |
-
-## Historical note
-
-I replaced a long legacy narrative (duplicate stories, wrong filenames such as `manifest.json`, Tailwind CDN as mandatory, delete without confirm) with **this index** to stop drift versus the PRD and the running app. Earlier drafts remain in Git history if needed.
+| Service worker | `sw.js` at repo root, cache `questlog-shell-v20` |
+| Visual theme | Dark pixel dungeon — stone, gold, cream palette with pixel art assets |

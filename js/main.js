@@ -87,8 +87,12 @@ function runAfterMotion(root, id, fn) {
   window.setTimeout(done, 720);
 }
 
-/** @param {HTMLElement} root */
-function showErrorState(root) {
+/**
+ * @param {HTMLElement} root
+ * @param {() => void} onRetry
+ */
+function showErrorState(root, onRetry) {
+  const panel = root.querySelector('.ql-panel');
   const activeEmpty = root.querySelector('[data-slot="active-empty"]');
   const activeList = root.querySelector('[data-slot="active-list"]');
   const completedEmpty = root.querySelector('[data-slot="completed-empty"]');
@@ -96,6 +100,10 @@ function showErrorState(root) {
 
   if (!activeList) return;
 
+  panel?.classList.add('ql-panel--error');
+  root.querySelectorAll('.ql-section-title').forEach((heading) => {
+    heading.classList.add('hidden');
+  });
   if (activeEmpty) activeEmpty.innerHTML = '';
   if (completedEmpty) completedEmpty.innerHTML = '';
   if (completedList) completedList.innerHTML = '';
@@ -105,17 +113,19 @@ function showErrorState(root) {
   <p class="ql-error-icon">⚠</p>
   <p class="ql-error-title">The scroll could not be retrieved.</p>
   <p class="ql-error-message">A shadow has fallen upon the archive. Try again.</p>
-  <button class="ql-btn ql-error-retry" type="button">Retry</button>
+  <button class="ql-btn ql-btn--ghost ql-error-retry" type="button">Retry</button>
 </div>`;
 
-  activeList.querySelector('.ql-error-retry')?.addEventListener('click', () => {
-    rerender(root);
-  });
+  activeList.querySelector('.ql-error-retry')?.addEventListener('click', onRetry);
 }
 
 /** @param {HTMLElement} root */
 function rerender(root) {
   const state = getState();
+  root.querySelector('.ql-panel')?.classList.remove('ql-panel--error');
+  root.querySelectorAll('.ql-section-title').forEach((heading) => {
+    heading.classList.remove('hidden');
+  });
   renderConnectivityBanner(online(), strings.offlineBanner);
 
   const counts = {
@@ -164,8 +174,12 @@ function rerender(root) {
   });
 }
 
-/** @param {HTMLElement} root */
-function bindApp(root) {
+/**
+ * @param {HTMLElement} root
+ * @param {{ initialError?: boolean }} [options]
+ */
+function bindApp(root, options = {}) {
+  let errorStateActive = options.initialError === true;
   const form = document.getElementById('ql-form');
   const input = document.getElementById('ql-input');
   const inputError = document.getElementById('ql-input-error');
@@ -212,15 +226,22 @@ function bindApp(root) {
     }
   });
 
-  subscribe(() => rerender(root));
-  if (demoErrorEnabled()) {
-    showErrorState(root);
+  const rerenderIfReady = () => {
+    if (!errorStateActive) rerender(root);
+  };
+
+  subscribe(rerenderIfReady);
+  if (errorStateActive) {
+    showErrorState(root, () => {
+      errorStateActive = false;
+      rerender(root);
+    });
   } else {
     rerender(root);
   }
 
-  window.addEventListener('online', () => rerender(root));
-  window.addEventListener('offline', () => rerender(root));
+  window.addEventListener('online', rerenderIfReady);
+  window.addEventListener('offline', rerenderIfReady);
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') hydrateFromStorage();
   });
@@ -238,7 +259,9 @@ async function boot() {
   showLoadingState(root);
   await wait(LOADING_DELAY_MS);
   root.innerHTML = appHtml;
-  bindApp(root);
+  const initialError = demoErrorEnabled();
+  if (initialError) console.log('error param detected');
+  bindApp(root, { initialError });
 }
 
 if (document.readyState === 'loading') {
