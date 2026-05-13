@@ -9,8 +9,7 @@ export const strings = {
   inputPlaceholder: 'Name thy quest…',
   activeHeading: 'Active quests',
   completedHeading: 'Completed quests',
-  emptyActive:
-    'The parchment lies bare. Inscribe thy first quest, brave adventurer, and let thy legend begin.',
+  emptyActive: 'The board awaits thy next quest, brave adventurer.',
   emptyCompleted:
     'No victories sealed as yet — complete a quest, and it shall be recorded here for all time.',
   delete: 'Abandon',
@@ -18,6 +17,7 @@ export const strings = {
   restore: 'Reopen',
   validationEmpty: 'Quest name required.',
   validationLong: 'This chronicle entry exceeds what the realm allows (200 characters).',
+  saveError: 'The scroll could not be saved. Storage may be full or unavailable.',
   deleteConfirm: 'Cast this entry from the record forever?',
   toastDismiss: 'Understood',
 };

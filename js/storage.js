@@ -1,3 +1,6 @@
+import { showErrorToast } from './dom/render-toast.js';
+import { strings } from './strings.js';
+
 const STORAGE_KEY = 'questlog.v1.state';
 
 /** @typedef {{ id: string, title: string, createdAt: string, completedAt: string | null }} Quest */
@@ -25,7 +28,12 @@ export function loadState() {
 
 /** @param {AppState} state */
 export function saveState(state) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (error) {
+    showErrorToast(strings.saveError);
+    console.error('Quest Log storage save failed', error);
+  }
 }
 
 export { STORAGE_KEY };

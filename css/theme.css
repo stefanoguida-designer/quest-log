@@ -293,6 +293,18 @@ header {
   align-items: center;
   max-width: 18rem;
   width: calc(100% - 2rem);
+  animation: king-enter 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes king-enter {
+  from {
+    transform: translateY(60px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .ql-king-portrait-wrap {
@@ -325,6 +337,12 @@ header {
 .ql-king-dismiss {
   font-size: 0.7rem;
   width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ql-king-popup {
+    animation: none;
+  }
 }
 
 .ql-quest-actions .ql-btn--ghost {
@@ -432,13 +450,30 @@ header {
 }
 
 .ql-empty {
-  padding: 0.75rem;
-  border-radius: 0.35rem;
-  border: 1px dashed var(--ql-gold-dim);
+  background-image: url('/assets/ui/wood-tile.png');
+  background-size: 48px 48px;
+  image-rendering: pixelated;
+  border: none;
+  padding: 2rem 1rem;
+  min-height: 8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-align: center;
   color: var(--ql-muted);
-  font-size: 0.7rem;
   font-style: italic;
-  background: transparent;
+}
+
+.ql-nail {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+
+.ql-empty-text {
+  margin: 0;
 }
 
 .ql-error-state {

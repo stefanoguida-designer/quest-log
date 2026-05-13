@@ -71,3 +71,8 @@ export function showToast(message, opts = {}) {
 
   hideTimer = window.setTimeout(() => dismissToast(), TOAST_DURATION_MS);
 }
+
+/** @param {string} message */
+export function showErrorToast(message) {
+  showToast(message, { variant: 'warn' });
+}
