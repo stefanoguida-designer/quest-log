@@ -50,11 +50,20 @@ export function renderQuestLists(root, state, handlers) {
     </ul>`;
 
   const activeSlot = root.querySelector('[data-slot="active-list"]');
+  const completedEmptySlot = root.querySelector('[data-slot="completed-empty"]');
   const completedSlot = root.querySelector('[data-slot="completed-list"]');
   if (!activeSlot || !completedSlot) return;
 
   activeSlot.innerHTML = activeHtml;
   completedSlot.innerHTML = completedHtml;
+
+  const showCompletedSection = state.completed.length > 0;
+  const completedHeading = completedEmptySlot?.previousElementSibling;
+  if (completedHeading?.classList.contains('ql-section-title')) {
+    completedHeading.classList.toggle('hidden', !showCompletedSection);
+  }
+  completedEmptySlot?.classList.toggle('hidden', !showCompletedSection);
+  completedSlot.classList.toggle('hidden', !showCompletedSection);
 
   root.querySelectorAll('button[data-action]').forEach((btn) => {
     btn.addEventListener('click', (e) => {

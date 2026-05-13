@@ -12,6 +12,7 @@ import { renderQuestLists } from './dom/render-list.js';
 import { renderConnectivityBanner } from './dom/render-chrome.js';
 import { emptyActiveHtml, emptyCompletedHtml } from './dom/render-empty.js';
 import { showToast } from './dom/render-toast.js';
+import { showKingPopup } from './king.js';
 import { showConfirm } from './modal.js';
 import { registerServiceWorker } from './pwa/register-sw.js';
 import { initTorches } from './torch.js';
@@ -89,6 +90,22 @@ function runAfterMotion(root, id, fn) {
 
 /**
  * @param {HTMLElement} root
+ * @param {string} id
+ */
+function showCompletionPopup(root, id) {
+  const wasActive = getState().active.some((quest) => quest.id === id);
+  completeQuest(id);
+  if (!wasActive) return;
+
+  const esc = escapeForSelector(id);
+  const focusTarget = root.querySelector(
+    `#ql-quest-list-completed li[data-quest-id="${esc}"] button[data-action="toggle-complete"]`
+  );
+  showKingPopup(focusTarget instanceof HTMLElement ? focusTarget : null);
+}
+
+/**
+ * @param {HTMLElement} root
  * @param {() => void} onRetry
  */
 function showErrorState(root, onRetry) {
@@ -143,11 +160,11 @@ function rerender(root) {
       const esc = escapeForSelector(id);
       const li = root.querySelector(`#ql-quest-list-active li[data-quest-id="${esc}"]`);
       if (!li || prefersReducedMotion()) {
-        completeQuest(id);
+        showCompletionPopup(root, id);
         return;
       }
       li.classList.add('ql-motion-seal');
-      runAfterMotion(root, id, () => completeQuest(id));
+      runAfterMotion(root, id, () => showCompletionPopup(root, id));
     },
     onDelete: async (id) => {
       if (!online()) return;

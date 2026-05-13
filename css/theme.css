@@ -3,7 +3,7 @@
   --ql-bg-panel: #241e16;
   --ql-stone: #3d3428;
   --ql-stone-light: #4f4538;
-  --ql-gold: #fdce26;
+  --ql-gold: #c3a442;
   --ql-gold-dim: #8a6e1a;
   --ql-cream: #e8d4a0;
   --ql-muted: rgba(232, 212, 160, 0.5);
@@ -76,7 +76,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 1rem;
   margin-bottom: 0.35rem;
 }
 
@@ -87,8 +87,8 @@ header {
 
 .ql-title {
   font-weight: 700;
-  letter-spacing: 0;
-  color: var(--ql-gold);
+  letter-spacing: -0.02em;
+  color: #e7e2df;
   margin: 0;
   font-size: 1.3rem;
 }
@@ -162,15 +162,15 @@ header {
   min-height: 2.75rem;
   padding: 0.5rem 0.65rem;
   border-radius: 0.35rem;
-  border: 1px solid var(--ql-stone-light);
-  background: var(--ql-stone);
+  border: none;
+  background: #0c0b0f;
   color: var(--ql-cream);
   font: inherit;
   font-size: 0.75rem;
 }
 
 .ql-input::placeholder {
-  color: var(--ql-muted);
+  color: rgba(232, 212, 160, 0.5);
 }
 
 .ql-input:focus-visible {
@@ -273,6 +273,60 @@ header {
   font-family: 'Silkscreen', monospace;
 }
 
+.ql-king-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.ql-king-overlay.hidden {
+  display: none;
+}
+
+.ql-king-popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 18rem;
+  width: calc(100% - 2rem);
+}
+
+.ql-king-portrait-wrap {
+  margin-bottom: -2px;
+  z-index: 1;
+}
+
+.ql-king-portrait {
+  width: 96px;
+  height: 96px;
+  image-rendering: pixelated;
+}
+
+.ql-king-box {
+  background: var(--ql-bg-panel);
+  border: 2px solid var(--ql-gold);
+  border-radius: 0.5rem;
+  padding: 1.25rem 1rem 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.ql-king-quote {
+  color: var(--ql-cream);
+  font-size: 0.75rem;
+  line-height: 1.7;
+  margin: 0 0 1rem;
+}
+
+.ql-king-dismiss {
+  font-size: 0.7rem;
+  width: 100%;
+}
+
 .ql-quest-actions .ql-btn--ghost {
   background: transparent;
   color: var(--ql-gold);
@@ -284,6 +338,10 @@ header {
   letter-spacing: 0;
   color: var(--ql-gold);
   margin: 1.25rem 0 0.5rem;
+}
+
+.ql-section-title:first-child {
+  margin-top: 0;
 }
 
 .ql-list {

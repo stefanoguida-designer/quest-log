@@ -1,5 +1,5 @@
 /* Quest Log — service worker (precache shell). Bump CACHE when precache list changes. */
-const CACHE = 'questlog-shell-v22';
+const CACHE = 'questlog-shell-v23';
 
 const PRECACHE_URLS = [
   '/',
@@ -9,6 +9,7 @@ const PRECACHE_URLS = [
   '/css/theme.css',
   '/css/motion.css',
   '/js/main.js',
+  '/js/king.js',
   '/js/modal.js',
   '/js/state.js',
   '/js/storage.js',
