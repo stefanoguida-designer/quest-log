@@ -8,7 +8,7 @@ These rules govern how source text is compressed into distillate format. Apply a
 - Rhetoric and persuasion: "This is a game-changer", "The exciting thing is"
 - Hedging: "We believe", "It's likely that", "Perhaps", "It seems"
 - Self-reference: "This document describes", "As outlined above"
-- Common knowledge explanations: "Vercel is a cloud platform company", "MIT is an open-source license", "JSON is a data interchange format"
+- Common knowledge explanations: "AWS is a cloud platform", "MIT is an open-source license", "JSON is a data interchange format"
 - Repeated introductions of the same concept
 - Section transition paragraphs
 - Formatting-only elements (decorative bold/italic for emphasis, horizontal rules for visual breaks)

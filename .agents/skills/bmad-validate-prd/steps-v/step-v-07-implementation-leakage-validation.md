@@ -92,7 +92,7 @@ Express, Django, Rails, Spring, Laravel, FastAPI, etc.
 PostgreSQL, MySQL, MongoDB, Redis, DynamoDB, Cassandra, etc.
 
 **Cloud Platforms:**
-AWS, GCP, Azure, Cloudflare, Vercel, Netlify, etc.
+AWS, GCP, Azure, Cloudflare, Netlify, etc.
 
 **Infrastructure:**
 Docker, Kubernetes, Terraform, Ansible, etc.

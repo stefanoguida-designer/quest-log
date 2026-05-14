@@ -2,8 +2,6 @@
 
 Quest Log is a **mobile-first PWA** that behaves like a personal todo list but reads and feels like an **adventurer's journal**: dark pixel-dungeon visuals, heraldic copy, local quest persistence, and small motion beats for create / complete / delete.
 
-**Live demo:** [quest-log-amber-sigma.vercel.app](https://quest-log-amber-sigma.vercel.app)
-
 The project exists to show that **spec-driven development can still produce a memorable, designer-led interface**. The core flows are intentionally simple, but the visual language is specific: a mundane task list reframed as a fantasy quest board.
 
 ## Run locally
@@ -76,7 +74,7 @@ These choices were made to demonstrate that SDD works equally well when the desi
 - **Motion:** completing a quest plays a short seal animation; deleting fades the row. New quests can play an unfurl animation after submit. All respect `prefers-reduced-motion`.
 - **Toasts:** validation and offline messages use an in-page heraldic toast, not `window.alert`; dismiss with **Understood** or **Escape**.
 - **King completion popup:** every time a quest is marked complete, a pixel art king portrait appears with a randomly selected royal commendation. The popup auto-dismisses after 5 seconds or can be closed manually. The contrast between the king's solemnity and the mundanity of the task is intentional.
-- **Easter eggs:** three rare popup variants (`alternative-king`, `jester`, `hacker`) can appear with 1/20 probability each on quest completion. They reuse the king popup mechanics and were manually verified.
+- **Easter eggs:** two rare popup variants (`jester`, `hacker`) can appear with 1/20 probability each on quest completion. They reuse the king popup mechanics and were manually verified.
 - **Animated torches:** two 5-frame pixel art torch sprites flank the title, rendered via canvas at ×2 scale with staggered timing for a natural flicker effect.
 - **Wood texture empty state:** the active quest list uses a tiled pixel art wood plank texture when empty, evoking a bare notice board waiting for quests.
 - **Accessibility polish:** modal focus trapping, toast focus restoration, decorative torch treatment, and landmark fixes were reviewed through iterative BMAD code review and axe checks.
@@ -110,7 +108,7 @@ The workflow was conversational and iterative, not a one-shot generation:
 - `bmad-check-implementation-readiness` was run twice mid-project, catching doc drift and stale references before submission.
 - `bmad-code-review` was run iteratively across four passes, surfacing and resolving accessibility gaps (modal focus trap, toast focus restoration, aria-hidden torches, landmark violations), PWA issues (SW registration timing, missing sprite precache), and interaction-state coverage.
 - `bmad-review-adversarial-general` audited the document set for redundancy and staleness, resulting in two historical validation reports being archived and four artifacts updated.
-- Lighthouse and axe audits were run against the live Vercel deployment; two moderate axe violations (`landmark-one-main`, `region`) were found and fixed before the final verification run.
+- Lighthouse and axe audits were run against the live deployment; two moderate axe violations (`landmark-one-main`, `region`) were found and fixed before the final verification run.
 - AI handled single-feature changes well; prompts spanning multiple files required tighter scoping and explicit "do not change unrelated files" constraints to avoid unintended side effects.
 
 ## What I learned
@@ -123,7 +121,7 @@ The workflow was conversational and iterative, not a one-shot generation:
 
 ## Verification
 
-Final verification was run against the live Vercel deployment in Chrome 124 / macOS incognito mode by Stefano Guida on 2026-05-13.
+Final verification was run against the live deployment in Chrome 124 / macOS incognito mode by Stefano Guida on 2026-05-13.
 
 | Check | Result |
 | --- | --- |

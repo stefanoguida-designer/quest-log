@@ -41,7 +41,7 @@ itself.
 ```
 ## Differentiation
 - Anti-fragmentation positioning: BMAD = cross-platform constant across 40+ fragmenting AI tools; no competitor provides shared methodology layer
-- Platform complexity delegated to Vercel skills CLI ecosystem (MIT); BMAD maintains methodology, not platform configs
+- Platform complexity delegated to skills CLI ecosystem (MIT); BMAD maintains methodology, not platform configs
 ```
 
 ### Technical Details to Compressed Facts
@@ -50,7 +50,7 @@ itself.
 ```
 ## Competitive Landscape
 
-- **Vercel Skills.sh**: 83K+ skills, 18 agents, largest curated leaderboard —
+- **Skills.sh**: 83K+ skills, 18 agents, largest curated leaderboard —
   but dev-only, skills trigger unreliably (20% without explicit prompting)
 - **SkillsMP**: 400K+ skills directory, pure aggregator with no curation or CLI
 - **ClawHub/OpenClaw**: ~3.2K curated skills with versioning/rollback, small ecosystem
@@ -69,7 +69,7 @@ itself.
 ```
 ## Competitive Landscape
 - No competitor combines structured methodology + plugin marketplace (whitespace)
-- Skills.sh (Vercel): 83K skills, 18 agents, dev-only, 20% trigger reliability
+- Skills.sh: 83K skills, 18 agents, dev-only, 20% trigger reliability
 - SkillsMP: 400K skills, aggregator only, no curation/CLI
 - ClawHub: 3.2K curated, versioning, small ecosystem
 - No-code platforms (Lindy, Copilot Studio, MindStudio, Make/Zapier): closed/siloed, no skill portability, business-only
@@ -100,14 +100,14 @@ bmad-help must always be included as a base skill in every bundle/install
 **Before:**
 ```
 We decided not to build our own platform support matrix going forward, instead
-delegating to the Vercel skills CLI ecosystem. The rationale is that maintaining
+delegating to the skills CLI ecosystem. The rationale is that maintaining
 20+ platform configs is the biggest maintenance burden and it's unsustainable
 at 40+ platforms.
 ```
 
 **After:**
 ```
-- Rejected: own platform support matrix. Reason: unsustainable at 40+ platforms; delegate to Vercel CLI ecosystem
+- Rejected: own platform support matrix. Reason: unsustainable at 40+ platforms; delegate to skills CLI ecosystem
 ```
 
 ## Full Example
@@ -128,7 +128,7 @@ parts: 1
 
 ## Core Concept
 - BMAD Next-Gen Installer: replaces monolithic Node.js CLI with skill-based plugin architecture for distributing BMAD methodology across 40+ AI platforms
-- Three layers: self-describing plugins (bmad-manifest.json), cross-platform install via Vercel skills CLI (MIT), runtime registration via bmad-setup skill
+- Three layers: self-describing plugins (bmad-manifest.json), cross-platform install via skills CLI (MIT), runtime registration via bmad-setup skill
 - Transforms BMAD from dev-only methodology into open platform for any domain (creative, therapeutic, educational, personal)
 
 ## Problem
@@ -140,7 +140,7 @@ parts: 1
 ## Solution Architecture
 - Plugins: skill bundles with Anthropic plugin standard as base format + bmad-manifest.json extending for BMAD-specific metadata (installer options, capabilities, help integration, phase ordering, dependencies)
 - Existing manifest example: `{"module-code":"bmm","replaces-skill":"bmad-create-product-brief","capabilities":[{"name":"create-brief","menu-code":"CB","supports-headless":true,"phase-name":"1-analysis","after":["brainstorming"],"before":["create-prd"],"is-required":true}]}`
-- Vercel skills CLI handles platform translation; integration pattern (wrap/fork/call) is PRD decision
+- Skills CLI handles platform translation; integration pattern (wrap/fork/call) is PRD decision
 - bmad-setup: global skill scanning installed bmad-manifest.json files, registering capabilities, configuring project settings; always included as base skill in every bundle (solves bootstrapping)
 - bmad-update: plugin update path without full reinstall; technical approach (diff/replace/preserve customizations) is PRD decision
 - Distribution tiers: (1) NPX installer wrapping skills CLI for technical users, (2) zip bundle + platform-specific README for non-technical users, (3) future marketplace
@@ -167,7 +167,7 @@ parts: 1
 - Existing CLI users have documented migration path
 
 ## Scope
-- In: manifest spec, bmad-setup, bmad-update, Vercel CLI integration, NPX installer, zip bundles, migration path
+- In: manifest spec, bmad-setup, bmad-update, skills CLI integration, NPX installer, zip bundles, migration path
 - Out: BMAD Builder, marketplace web platform, skill conversion (prerequisite, separate), one-click install for all platforms, monetization, quality certification process (gated-submission principle is architectural requirement; process defined separately)
 - Deferred: CI/CD integration, telemetry for module authors, air-gapped enterprise install, zip bundle integrity verification (checksums/signing), deeper non-technical platform integrations
 
@@ -181,7 +181,7 @@ parts: 1
 - Skills already use directory-per-skill layout; bmad-manifest.json sidecars exist but are not source of truth
 - Key shift: CSV-based static manifests → JSON-based runtime scanning
 
-## Vercel Skills CLI
+## Skills CLI
 - `npx skills add <source>` — GitHub, GitLab, local paths, git URLs
 - 40+ agents; per-agent path mappings; symlinks (recommended) or copies
 - Scopes: project-level or global
@@ -191,24 +191,24 @@ parts: 1
 
 ## Competitive Landscape
 - No competitor combines structured methodology + plugin marketplace (whitespace)
-- Skills.sh (Vercel): 83K skills, dev-only, 20% trigger reliability without explicit prompting
+- Skills.sh: 83K skills, dev-only, 20% trigger reliability without explicit prompting
 - SkillsMP: 400K skills, aggregator only, no curation
 - ClawHub: 3.2K curated, versioning, small
 - No-code platforms (Lindy, Copilot Studio, MindStudio, Make/Zapier): closed/siloed, no skill portability, business-only
 - Market: $7.84B (2025) → $52.62B (2030); Agent Skills spec ~4 months old, 351K+ skills; standards converging under Linux Foundation AAIF (MCP, AGENTS.md, A2A)
 
 ## Rejected Alternatives
-- Building own platform support matrix: unsustainable at 40+; delegate to Vercel ecosystem
+- Building own platform support matrix: unsustainable at 40+; delegate to skills CLI ecosystem
 - One-click install for non-technical v1: emerging space; guidance-based, improve over time
 - Prior roadmap/brainstorming: clean start, unconstrained by previous planning
 
 ## Open Questions
-- Vercel CLI integration pattern: wrap/fork/call/peer dependency?
+- Skills CLI integration pattern: wrap/fork/call/peer dependency?
 - bmad-update mechanics: diff/replace? Preserve user customizations?
 - Migration story: command/manual reinstall/compatibility shim?
 - Cross-platform testing: CI matrix for top N? Community testing for rest?
 - bmad-manifest.json as open standard submission to Agent Skills governance?
-- Platforms NOT supported by Vercel skills CLI?
+- Platforms NOT supported by skills CLI?
 - Manifest versioning strategy for backward compatibility?
 - Plugin author getting-started experience and tooling?
 
@@ -221,7 +221,7 @@ parts: 1
 ## Risks
 - Manifest format evolution creates versioning/compatibility burden once third-party authors publish
 - Quality gate needs defined process, not just claim — gated review model addresses
-- 40+ platform testing environments even with Vercel handling translation
+- 40+ platform testing environments even with skills CLI handling translation
 - Scope creep pressure from marketplace vision (explicitly excluded but primary long-term value)
-- Vercel dependency: minor supply-chain risk; MIT license allows fork if deprioritized
+- Skills CLI dependency: minor supply-chain risk; MIT license allows fork if deprioritized
 ```
