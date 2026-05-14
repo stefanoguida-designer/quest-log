@@ -4,6 +4,12 @@ preloadKing.src = '/assets/sprites/king.png';
 const preloadAlternativeKing = new Image();
 preloadAlternativeKing.src = '/assets/sprites/alternative-king.png';
 
+const preloadJester = new Image();
+preloadJester.src = '/assets/sprites/jester.png';
+
+const preloadHacker = new Image();
+preloadHacker.src = '/assets/sprites/hacker.png';
+
 const KING_QUOTES = [
   '«Thou hast served the crown with honour. We are most grateful.»',
   '«The kingdom owes thee a debt, brave knight.»',
@@ -17,18 +23,9 @@ const KING_QUOTES = [
   '«A deed most noble. Thy king thanks thee from the depths of his heart.»',
 ];
 
-const ALTERNATIVE_KING_QUOTES = [
-  'SORRY LOSERS, I AM THE TRUE KING NOW!',
-  'THE KING WAS WEAK. VERY WEAK. I AM THE REAL KING!',
-  'EVERYBODY LOVES ME. THE REAL KING. MAYBE THE GREATEST KING EVER!',
-  'FAKE KING OUT. TRUE KING IN. THANK YOU!',
-  'I HAVE THE BEST CROWN. PEOPLE ARE SAYING IT!',
-  'THE OTHER KING? TOTAL DISASTER. SAD!',
-  'LOOK AT ME. I AM YOUR FAVORITE KING. BY FAR!',
-  'NOBODY DOES KING BETTER THAN ME!',
-  'SORRY, BUT THE THRONE IS MINE NOW. HUGE WIN!',
-  'THE PEOPLE CHOSE ME. THE REAL KING. BIGLY!',
-];
+const ALTERNATIVE_KING_QUOTE = '«I am the true king!»';
+const JESTER_QUOTE = '«Ha! The king sends his regards. I send his laundry bill.»';
+const HACKER_QUOTE = '«AUTH_FAILURE: token signed by unauthorized king»';
 
 const COUNTDOWN_SECONDS = 5;
 
@@ -43,7 +40,19 @@ const POPUP_VARIANTS = {
     imageSrc: '/assets/sprites/alternative-king.png',
     imageAlt: 'A surprise visitor',
     imageAriaLabel: 'A surprise visitor',
-    quotes: ALTERNATIVE_KING_QUOTES,
+    quote: ALTERNATIVE_KING_QUOTE,
+  },
+  jester: {
+    imageSrc: '/assets/sprites/jester.png',
+    imageAlt: 'A mischievous jester',
+    imageAriaLabel: 'A mischievous jester',
+    quote: JESTER_QUOTE,
+  },
+  hacker: {
+    imageSrc: '/assets/sprites/hacker.png',
+    imageAlt: 'A rogue hacker',
+    imageAriaLabel: 'A rogue hacker',
+    quote: HACKER_QUOTE,
   },
 };
 
@@ -89,10 +98,14 @@ function randomQuote(quotes) {
 
 function pickPopupVariant() {
   const roll = Math.floor(Math.random() * 20) + 1;
-  return roll === 1 ? 'alternative' : 'king';
+  if (roll === 1) return 'alternative';
+  if (roll === 2) return 'jester';
+  if (roll === 3) return 'hacker';
+  return 'king';
 }
 
-function applyPopupVariant(portrait, variantConfig) {
+function applyPopupVariant(popup, variantConfig) {
+  const { portrait, quote } = popup;
   portrait.setAttribute('src', variantConfig.imageSrc);
   portrait.alt = variantConfig.imageAlt;
   if (variantConfig.imageAriaLabel) {
@@ -100,6 +113,7 @@ function applyPopupVariant(portrait, variantConfig) {
   } else {
     portrait.removeAttribute('aria-label');
   }
+  quote.textContent = variantConfig.quote ?? randomQuote(variantConfig.quotes);
 }
 
 function ensurePopup() {
@@ -150,8 +164,7 @@ export function showKingPopup(focusTarget = null) {
   returnFocusTo = focusTarget;
 
   let remaining = COUNTDOWN_SECONDS;
-  applyPopupVariant(popup.portrait, variantConfig);
-  popup.quote.textContent = randomQuote(variantConfig.quotes);
+  applyPopupVariant(popup, variantConfig);
   popup.countdown.textContent = String(remaining);
   popup.overlay.classList.remove('hidden');
   popup.dismiss.onclick = closeKingPopup;

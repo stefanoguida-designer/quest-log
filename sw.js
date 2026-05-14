@@ -1,5 +1,5 @@
 /* Quest Log — service worker (precache shell). Bump CACHE when precache list changes. */
-const CACHE = 'questlog-shell-v33';
+const CACHE = 'questlog-shell-v34';
 
 const PRECACHE_URLS = [
   '/',
@@ -25,6 +25,8 @@ const PRECACHE_URLS = [
   '/assets/sprites/torch-spritesheet.png',
   '/assets/sprites/king.png',
   '/assets/sprites/alternative-king.png',
+  '/assets/sprites/jester.png',
+  '/assets/sprites/hacker.png',
   '/assets/ui/wood-tile.png',
   '/assets/ui/nail.png',
   '/assets/icons/icon-192.png',
