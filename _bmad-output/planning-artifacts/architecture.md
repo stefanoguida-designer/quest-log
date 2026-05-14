@@ -245,6 +245,8 @@ quest-log/
 - `/assets/sprites/stone-tile.png`
 - `/assets/sprites/torch-spritesheet.png`
 - `/assets/sprites/king.png`
+- `/assets/sprites/jester.png`
+- `/assets/sprites/hacker.png`
 - `/assets/ui/wood-tile.png`
 - `/assets/ui/nail.png`
 - `/assets/icons/icon-192.png`

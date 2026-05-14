@@ -31,6 +31,7 @@ _Use after `python3 -m http.server` and opening `http://localhost:8080/` (HTTPS 
 | US-05 | Empty active + empty completed copy when applicable |
 | Offline MVP | Offline: banner + disabled actions / no new persistence on mutations; online again + interaction restores from `localStorage` (see PRD NFR-OFF-01 + `architecture.md` NFR-OFF-01) |
 | US-06 | Install prompt / installed app opens standalone (matrix browser) |
+| Easter eggs | Three rare variants (alternative-king, jester, hacker) appear with 1/20 probability each on quest completion. All reuse king popup mechanics. Verified manually. |
 
 ## Sign-off
 

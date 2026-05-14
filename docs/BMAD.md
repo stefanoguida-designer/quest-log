@@ -39,7 +39,7 @@ _Orientation doc only. The binding specifications are the **PRD**, **product bri
 | Service worker | `sw.js` |
 | Offline fallback | `offline.html` |
 | Icons | `assets/icons/*` |
-| Pixel art sprites | `assets/sprites/torch-spritesheet.png`, `assets/sprites/logo.png`, `assets/sprites/stone-tile.png`, `assets/sprites/king.png` |
+| Pixel art sprites | `assets/sprites/torch-spritesheet.png`, `assets/sprites/logo.png`, `assets/sprites/stone-tile.png`, `assets/sprites/king.png`, `assets/sprites/jester.png`, `assets/sprites/hacker.png` |
 | UI textures | `assets/ui/wood-tile.png`, `assets/ui/nail.png` |
 | PWA icons | `assets/icons/icon-192.png`, `assets/icons/icon-512.png` |
 
