@@ -1,9 +1,6 @@
 const preloadKing = new Image();
 preloadKing.src = '/assets/sprites/king.png';
 
-const preloadAlternativeKing = new Image();
-preloadAlternativeKing.src = '/assets/sprites/alternative-king.png';
-
 const preloadJester = new Image();
 preloadJester.src = '/assets/sprites/jester.png';
 
@@ -23,7 +20,6 @@ const KING_QUOTES = [
   '«A deed most noble. Thy king thanks thee from the depths of his heart.»',
 ];
 
-const ALTERNATIVE_KING_QUOTE = '«I am the true king!»';
 const JESTER_QUOTE = '«Ha! The king sends his regards. I send his laundry bill.»';
 const HACKER_QUOTE = '«AUTH_FAILURE: token signed by unauthorized king»';
 
@@ -35,12 +31,6 @@ const POPUP_VARIANTS = {
     imageAlt: 'The King',
     imageAriaLabel: '',
     quotes: KING_QUOTES,
-  },
-  alternative: {
-    imageSrc: '/assets/sprites/alternative-king.png',
-    imageAlt: 'A surprise visitor',
-    imageAriaLabel: 'A surprise visitor',
-    quote: ALTERNATIVE_KING_QUOTE,
   },
   jester: {
     imageSrc: '/assets/sprites/jester.png',
@@ -98,9 +88,8 @@ function randomQuote(quotes) {
 
 function pickPopupVariant() {
   const roll = Math.floor(Math.random() * 20) + 1;
-  if (roll === 1) return 'alternative';
-  if (roll === 2) return 'jester';
-  if (roll === 3) return 'hacker';
+  if (roll === 1) return 'jester';
+  if (roll === 2) return 'hacker';
   return 'king';
 }
 
