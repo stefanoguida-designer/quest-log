@@ -23,7 +23,7 @@ const KING_QUOTES = [
   '«A deed most noble. Thy king thanks thee from the depths of his heart.»',
 ];
 
-const ALTERNATIVE_KING_QUOTE = '«I am the true king!»';
+const ALTERNATIVE_KING_QUOTE = '«Sorry losers, the throne is mine now. Big win!»';
 const JESTER_QUOTE = '«Ha! The king sends his regards. I send his laundry bill.»';
 const HACKER_QUOTE = '«AUTH_FAILURE: token signed by unauthorized king»';
 
